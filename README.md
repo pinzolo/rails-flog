@@ -1,7 +1,7 @@
 # rails-flog
 
 [![Build Status](https://secure.travis-ci.org/pinzolo/rails-flog.png)](http://travis-ci.org/pinzolo/rails-flog)
-[![Coverage Status](https://coveralls.io/repos/pinzolo/detox/rails-flog.png)](https://coveralls.io/r/pinzolo/rails-flog)
+[![Coverage Status](https://coveralls.io/repos/pinzolo/rails-flog/badge.png)](https://coveralls.io/r/pinzolo/rails-flog)
 
 Format parameters Hash and SQL in Rails log file.
 
