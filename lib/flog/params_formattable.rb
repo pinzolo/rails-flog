@@ -6,22 +6,31 @@ class ActionController::LogSubscriber
   alias :original_start_processing :start_processing
 
   def start_processing(event)
-    base_params = event.payload[:params]
-    if base_params && base_params.respond_to?(:ai)
-      class << base_params
-        alias :original_except :except
+    raw_params = event.payload[:params]
+    event.payload[:params] = replace_params(raw_params) if raw_params
+    original_start_processing(event)
+    # restore
+    event.payload[:params] = raw_params
+  end
 
-        def except(*keys)
-          excepted = original_except(*keys)
-          class << excepted
-            def inspect
-              "\n#{ai}"
-            end
+  private
+  def replace_params(params)
+    return params unless params.respond_to?(:ai)
+
+    replaced = params.dup
+    class << replaced
+      alias :original_except :except
+
+      def except(*keys)
+        excepted = original_except(*keys)
+        class << excepted
+          def inspect
+            "\n#{ai}"
           end
-          excepted
         end
+        excepted
       end
     end
-    original_start_processing(event)
+    replaced
   end
 end

@@ -7,10 +7,12 @@ class ActiveRecord::LogSubscriber
   def sql(event)
     raw_sql = event.payload[:sql]
     event.payload[:sql] = "\n\t#{format_sql(raw_sql)}" if raw_sql.present?
-
     original_sql(event)
+    # restore
+    event.payload[:sql] = raw_sql
   end
 
+  private
   def format_sql(sql)
     require "anbt-sql-formatter/formatter"
     rule = AnbtSql::Rule.new
