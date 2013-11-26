@@ -1,7 +1,5 @@
-require "rails/flog/version"
+# coding: utf-8
+require "flog/version"
+require "flog/sql_formattable"
+require "flog/params_formattable"
 
-module Rails
-  module Flog
-    # Your code goes here...
-  end
-end
