@@ -1,4 +1,5 @@
 # coding: utf-8
+require "action_controller/log_subscriber"
 require "awesome_print"
 
 class ActionController::LogSubscriber
@@ -14,10 +15,10 @@ class ActionController::LogSubscriber
           excepted = original_except(*keys)
           class << excepted
             def inspect
-              ai
+              "\n#{ai}"
             end
           end
-          expcepted
+          excepted
         end
       end
     end

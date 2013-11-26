@@ -1,11 +1,12 @@
 # coding: utf-8
+require "active_record/log_subscriber"
 
 class ActiveRecord::LogSubscriber
   alias :original_sql :sql
 
   def sql(event)
     raw_sql = event.payload[:sql]
-    event.payload[:sql] = format_sql(raw_sql) if raw_sql.present?
+    event.payload[:sql] = "\n\t#{format_sql(raw_sql)}" if raw_sql.present?
 
     original_sql(event)
   end
