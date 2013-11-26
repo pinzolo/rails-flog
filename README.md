@@ -1,12 +1,13 @@
 # Rails::Flog
 
-TODO: Write a gem description
+Format parameters Hash and SQL in Rails log file.
 
 ## Installation
 
 Add this line to your application's Gemfile:
+(Recommendation: use only :development and :test enviroment)
 
-    gem 'rails-flog'
+    gem 'rails-flog', :require => "flog"
 
 And then execute:
 
@@ -16,10 +17,6 @@ Or install it yourself as:
 
     $ gem install rails-flog
 
-## Usage
-
-TODO: Write usage instructions here
-
 ## Contributing
 
 1. Fork it
@@ -28,3 +25,8 @@ TODO: Write usage instructions here
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
 
+## Thanks
+
+[awesome_print](https://github.com/michaeldv/awesome_print)
+[anbt-sql-formatter](https://github.com/sonota/anbt-sql-formatter)
+[yuroyoro](http://yuroyoro.hatenablog.com/entry/2013/04/12/141648)
