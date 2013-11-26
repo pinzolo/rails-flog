@@ -6,10 +6,13 @@ class ActiveRecord::LogSubscriber
 
   def sql(event)
     raw_sql = event.payload[:sql]
-    event.payload[:sql] = "\n\t#{format_sql(raw_sql)}" if raw_sql.present?
-    original_sql(event)
-    # restore
-    event.payload[:sql] = raw_sql
+    begin
+      event.payload[:sql] = "\n\t#{format_sql(raw_sql)}" if raw_sql.present?
+      original_sql(event)
+    ensure
+      # restore
+      event.payload[:sql] = raw_sql
+    end
   end
 
   private

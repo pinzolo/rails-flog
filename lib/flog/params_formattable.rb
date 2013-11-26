@@ -7,10 +7,13 @@ class ActionController::LogSubscriber
 
   def start_processing(event)
     raw_params = event.payload[:params]
-    event.payload[:params] = replace_params(raw_params) if raw_params
-    original_start_processing(event)
-    # restore
-    event.payload[:params] = raw_params
+    begin
+      event.payload[:params] = replace_params(raw_params) if raw_params
+      original_start_processing(event)
+    ensure
+      # restore
+      event.payload[:params] = raw_params
+    end
   end
 
   private
