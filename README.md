@@ -6,16 +6,16 @@ Format parameters Hash and SQL in Rails log file.
 
 ### Parameters (using awesome_print)
 
-TODO:
+[TODO]
 
 ### SQL (using anbt-sql-formatter)
 
-TODO:
+[TODO]
 
 ## Installation
 
-Add this line to your application's Gemfile:
-(Recommendation: use only :development and :test enviroment)
+Add this line to your application's Gemfile:  
+(Recommendation: use only `:development` and `:test` enviroment)
 
     gem 'rails-flog', :require => "flog"
 
