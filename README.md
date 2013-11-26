@@ -2,6 +2,16 @@
 
 Format parameters Hash and SQL in Rails log file.
 
+## Before and after
+
+### Parameters (using awesome_print)
+
+TODO:
+
+### SQL (using anbt-sql-formatter)
+
+TODO:
+
 ## Installation
 
 Add this line to your application's Gemfile:
