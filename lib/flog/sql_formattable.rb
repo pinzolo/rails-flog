@@ -1,22 +1,24 @@
 # coding: utf-8
 require "active_record/log_subscriber"
+require "flog/payload_value_shuntable"
 
 class ActiveRecord::LogSubscriber
+  include PayloadValueShuntable
+
   alias :original_sql :sql
 
   def sql(event)
-    raw_sql = event.payload[:sql]
-    begin
-      event.payload[:sql] = "\n\t#{format_sql(raw_sql)}" if raw_sql.present?
+    formatted = format_sql(event.payload[:sql])
+
+    shunt_payload_value(event.payload, :sql, "\n\t#{formatted}") do
       original_sql(event)
-    ensure
-      # restore
-      event.payload[:sql] = raw_sql
     end
   end
 
   private
   def format_sql(sql)
+    return sql if sql.blank?
+
     require "anbt-sql-formatter/formatter"
     rule = AnbtSql::Rule.new
     rule.keyword = AnbtSql::Rule::KEYWORD_UPPER_CASE
