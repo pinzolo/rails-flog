@@ -1,0 +1,9 @@
+source "https://rubygems.org"
+
+gem "activesupport", "~>3.2.0"
+gem "activerecord" , "~>3.2.0"
+gem "actionpack"   , "~>3.2.0"
+gem "anbt-sql-formatter"
+gem "awesome_print"
+
+gemspec :path => "../"
