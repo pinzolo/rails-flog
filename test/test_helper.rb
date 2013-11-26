@@ -1,4 +1,7 @@
 # coding: utf-8
+require "coveralls"
+Coveralls.wear!
+
 require "active_support"
 require "active_record"
 require "action_controller"
