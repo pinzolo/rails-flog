@@ -27,6 +27,10 @@ Or install it yourself as:
 
     $ gem install rails-flog
 
+## Usage
+
+Just install.
+
 ## Contributing
 
 1. Fork it
