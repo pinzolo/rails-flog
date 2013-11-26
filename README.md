@@ -1,4 +1,4 @@
-# Rails::Flog
+# rails-flog
 
 Format parameters Hash and SQL in Rails log file.
 
@@ -37,6 +37,6 @@ Or install it yourself as:
 
 ## Thanks
 
-[awesome_print](https://github.com/michaeldv/awesome_print)
-[anbt-sql-formatter](https://github.com/sonota/anbt-sql-formatter)
-[yuroyoro](http://yuroyoro.hatenablog.com/entry/2013/04/12/141648)
+- [awesome_print](https://github.com/michaeldv/awesome_print)
+- [anbt-sql-formatter](https://github.com/sonota/anbt-sql-formatter)
+- [yuroyoro](http://yuroyoro.hatenablog.com/entry/2013/04/12/141648)
