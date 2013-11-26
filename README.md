@@ -1,5 +1,8 @@
 # rails-flog
 
+[![Build Status](https://secure.travis-ci.org/pinzolo/detox.png)](http://travis-ci.org/pinzolo/detox)
+[![Coverage Status](https://coveralls.io/repos/pinzolo/detox/badge.png)](https://coveralls.io/r/pinzolo/detox)
+
 Format parameters Hash and SQL in Rails log file.
 
 ## Before and after
@@ -14,7 +17,7 @@ Format parameters Hash and SQL in Rails log file.
 
 ## Installation
 
-Add this line to your application's Gemfile:  
+Add this line to your application's Gemfile:
 (Recommendation: use only `:development` and `:test` enviroment)
 
     gem 'rails-flog', :require => "flog"
