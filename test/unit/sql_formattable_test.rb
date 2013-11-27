@@ -29,13 +29,13 @@ class SqlFormattableTest < ActiveSupport::TestCase
     if ActiveRecord::Base.logger.errors.present?
       fail ActiveRecord::Base.logger.errors.first
     else
-      logs = ActiveRecord::Base.logger.debugs
-      assert_equal "\tSELECT", logs[1]
-      assert_equal %{\t\t"books" . *}, logs[2]
-      assert_equal "\tFROM", logs[3]
-      assert_equal %{\t\t"books"}, logs[4]
-      assert_equal "\tWHERE", logs[5]
-      assert_equal %{\t\t"books" . "category" = 'comics'}, logs[6]
+      logs = ActiveRecord::Base.logger.debugs.map { |log| log.gsub("\t", "    ") }
+      assert_equal %{    SELECT}                             , logs[1]
+      assert_equal %{        "books" . *}                    , logs[2]
+      assert_equal %{    FROM}                               , logs[3]
+      assert_equal %{        "books"}                        , logs[4]
+      assert_equal %{    WHERE}                              , logs[5]
+      assert_equal %{        "books" . "category" = 'comics'}, logs[6]
     end
   end
 end
