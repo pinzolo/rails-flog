@@ -15,18 +15,17 @@ class Book < ActiveRecord::Base; end
 class SqlFormattableTest < ActiveSupport::TestCase
   def setup
     @old_logger = ActiveRecord::Base.logger
-    super
+    ActiveSupport::LogSubscriber.colorize_logging = false
     ActiveRecord::Base.logger = TestLogger.new
   end
 
   def teardown
-    super
     ActiveRecord::Base.logger = @old_logger
   end
 
   def test_sql_is_formatted
     Book.where(category: "comics").to_a
-    logs = ActiveRecord::Base.logger.debugs.map { |log| log.gsub(/\e\[\d+m/, "") }
+    logs = ActiveRecord::Base.logger.debugs
     assert_equal "\tSELECT", logs[1]
     assert_equal %{\t\t"books" . *}, logs[2]
     assert_equal "\tFROM", logs[3]
