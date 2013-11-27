@@ -2,7 +2,7 @@
 require "coveralls"
 Coveralls.wear!
 
-require "active_support"
+Bundler.require
 require "flog"
 require "test/unit"
 

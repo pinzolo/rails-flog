@@ -23,11 +23,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "sqlite3"
   spec.add_development_dependency "coveralls"
 
-  rails_version = ">=3.2.0"
-
-  spec.add_dependency "activesupport", rails_version
-  spec.add_dependency "activerecord" , rails_version
-  spec.add_dependency "actionpack"   , rails_version
+  spec.add_dependency "rails", ">=3.2.0"
   spec.add_dependency "anbt-sql-formatter"
   spec.add_dependency "awesome_print"
 end
