@@ -9,10 +9,10 @@ class ActionController::LogSubscriber
   alias :original_start_processing :start_processing
 
   def start_processing(event)
-    replaced = replace_params(params[:params])
+    replaced = replace_params(event.payload[:params])
 
     shunt_payload_value(event.payload, :params, replaced) do
-      original_sql(event)
+      original_start_processing(event)
     end
   end
 

@@ -28,10 +28,10 @@ class TestLogger
   end
 
   def info(message)
-    @infos << message
+    @infos += message.split("\n")
   end
 
   def error(message)
-    @errors << message
+    @errors += message.split("\n")
   end
 end
