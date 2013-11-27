@@ -27,7 +27,7 @@ class SqlFormattableTest < ActiveSupport::TestCase
   def test_sql_is_formatted
     Book.where(category: "comics").to_a
     logs = ActiveRecord::Base.logger.debugs.map { |log| log.gsub(/\e\[\d+m/, "") }
-    assert_equal "\tSELECT", remove_color_sequences(logs[1])
+    assert_equal "\tSELECT", logs[1]
     assert_equal %{\t\t"books" . *}, logs[2]
     assert_equal "\tFROM", logs[3]
     assert_equal %{\t\t"books"}, logs[4]
