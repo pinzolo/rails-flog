@@ -26,12 +26,12 @@ class SqlFormattableTest < ActiveSupport::TestCase
 
   def test_sql_is_formatted
     Book.where(category: "comics").to_a
-    logs = ActiveRecord::Base.logger.debugs
-    assert_equal "\tSELECT", logs[1]
+    logs = ActiveRecord::Base.logger.debugs.map { |log| log.gsub(/\e\[\d+m/, "") }
+    assert_equal "\tSELECT", remove_color_sequences(logs[1])
     assert_equal %{\t\t"books" . *}, logs[2]
     assert_equal "\tFROM", logs[3]
     assert_equal %{\t\t"books"}, logs[4]
     assert_equal "\tWHERE", logs[5]
-    assert logs[6].start_with?(%{\t\t"books" . "category" = 'comics'})
+    assert_equal %{\t\t"books" . "category" = 'comics'}, logs[6]
   end
 end
