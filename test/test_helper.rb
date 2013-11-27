@@ -3,19 +3,23 @@ require "coveralls"
 Coveralls.wear!
 
 require "active_support"
-require "active_record"
-require "action_controller"
 require "flog"
 require "test/unit"
 
 class TestLogger
-  attr_accessor :debugs, :infos
+  attr_accessor :debugs, :infos, :errors
+
   def initialize
     @debugs = []
     @infos = []
+    @errors = []
   end
 
   def debug?
+    true
+  end
+
+  def info?
     true
   end
 
@@ -25,5 +29,9 @@ class TestLogger
 
   def info(message)
     @infos << message
+  end
+
+  def error(message)
+    @errors << message
   end
 end
