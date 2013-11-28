@@ -87,6 +87,11 @@ Or install it yourself as:
 
 Just install.
 
+## Supported versions
+
+- Ruby: 1.9.3, 2.0.0
+- Rails: 3.2.x, 4.0.x
+
 ## Contributing
 
 1. Fork it
