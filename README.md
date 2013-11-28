@@ -7,7 +7,7 @@ rails-flog provides feature that formats parameters Hash and SQL in Rails log fi
 
 ## Before and after (Using Redmine)
 
-### Before
+### Before (Default)
 
 ```
 # Parameters
@@ -18,7 +18,7 @@ Processing by IssuesController#create as HTML
   IssueCustomField Load (0.0ms)  SELECT "custom_fields".* FROM "custom_fields" WHERE "custom_fields"."type" IN ('IssueCustomField') AND (is_for_all = 't' OR id IN (SELECT DISTINCT cfp.custom_field_id FROM custom_fields_projects cfp WHERE cfp.project_id = 1)) ORDER BY custom_fields.position ASC
 ```
 
-### After
+### After (Use rails-flog)
 
 ```
 # Parameters
