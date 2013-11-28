@@ -11,7 +11,7 @@ rails-flog provides feature that formats parameters Hash and SQL in Rails log fi
 
 ```
 Processing by IssuesController#create as HTML
-  Parameters: {"utf8"=>"✓", "authenticity_token"=>"VYCWAsE+aAN+zSZq2H3ONNqaU8rlyfbnXLfbwDY1i10=", "issue"=>{"is_private"=>"0", "tracker_id"=>"1", "subject"=>"test ticket", "description"=>"test ticket description", "status_id"=>"1", "priority_id"=>"2", "assigned_to_id"=>"1", "parent_issue_id"=>"", "start_date"=>"2013-11-28", "due_date"=>"2013-11-29", "estimated_hours"=>"5", "done_ratio"=>"10"}, "commit"=>"作成", "project_id"=>"test"}
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"VYCWAsE+aAN+zSZq2H3ONNqaU8rlyfbnXLfbwDY1i10=", "issue"=>{"is_private"=>"0", "tracker_id"=>"1", "subject"=>"test ticket", "description"=>"test ticket description", "status_id"=>"1", "priority_id"=>"2", "assigned_to_id"=>"1", "parent_issue_id"=>"", "start_date"=>"2013-11-28", "due_date"=>"2013-11-29", "estimated_hours"=>"5", "done_ratio"=>"10"}, "commit"=>"Create", "project_id"=>"test"}
   Setting Load (0.0ms)  SELECT "settings".* FROM "settings" WHERE "settings"."name" = 'session_lifetime' LIMIT 1
 ```
 
@@ -37,7 +37,7 @@ Processing by IssuesController#create as HTML
         "estimated_hours" => "5",
              "done_ratio" => "10"
     },
-                "commit" => "作成",
+                "commit" => "Create",
             "project_id" => "test"
 }
   Setting Load (0.0ms)
