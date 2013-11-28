@@ -51,7 +51,7 @@ Processing by IssuesController#create as HTML
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Add this line to your application's Gemfile:  
 (Recommendation: use only `:development` and `:test` enviroment)
 
     gem 'rails-flog', :require => "flog"
