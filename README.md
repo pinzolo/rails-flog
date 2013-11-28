@@ -3,17 +3,51 @@
 [![Build Status](https://secure.travis-ci.org/pinzolo/rails-flog.png)](http://travis-ci.org/pinzolo/rails-flog)
 [![Coverage Status](https://coveralls.io/repos/pinzolo/rails-flog/badge.png)](https://coveralls.io/r/pinzolo/rails-flog)
 
-Format parameters Hash and SQL in Rails log file.
+rails-flog provides feature that formats parameters Hash and SQL in Rails log file.
 
 ## Before and after
 
-### Parameters (using awesome_print)
+### Before
 
-[TODO]
+```
+Processing by IssuesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"VYCWAsE+aAN+zSZq2H3ONNqaU8rlyfbnXLfbwDY1i10=", "issue"=>{"is_private"=>"0", "tracker_id"=>"1", "subject"=>"test ticket", "description"=>"test ticket description", "status_id"=>"1", "priority_id"=>"2", "assigned_to_id"=>"1", "parent_issue_id"=>"", "start_date"=>"2013-11-28", "due_date"=>"2013-11-29", "estimated_hours"=>"5", "done_ratio"=>"10"}, "commit"=>"作成", "project_id"=>"test"}
+  Setting Load (0.0ms)  SELECT "settings".* FROM "settings" WHERE "settings"."name" = 'session_lifetime' LIMIT 1
+```
 
-### SQL (using anbt-sql-formatter)
+### After
 
-[TODO]
+```
+Processing by IssuesController#create as HTML
+  Parameters:
+{
+                  "utf8" => "✓",
+    "authenticity_token" => "VYCWAsE+aAN+zSZq2H3ONNqaU8rlyfbnXLfbwDY1i10=",
+                 "issue" => {
+             "is_private" => "0",
+             "tracker_id" => "1",
+                "subject" => "test ticket",
+            "description" => "test ticket description",
+              "status_id" => "1",
+            "priority_id" => "2",
+         "assigned_to_id" => "1",
+        "parent_issue_id" => "",
+             "start_date" => "2013-11-28",
+               "due_date" => "2013-11-29",
+        "estimated_hours" => "5",
+             "done_ratio" => "10"
+    },
+                "commit" => "作成",
+            "project_id" => "test"
+}
+  Setting Load (0.0ms)
+	SELECT
+		"settings" . *
+	FROM
+		"settings"
+	WHERE
+		"settings" . "name" = 'session_lifetime' LIMIT 1
+```
 
 ## Installation
 
@@ -44,6 +78,6 @@ Just install.
 
 ## Thanks
 
-- [awesome_print](https://github.com/michaeldv/awesome_print)
-- [anbt-sql-formatter](https://github.com/sonota/anbt-sql-formatter)
-- [yuroyoro](http://yuroyoro.hatenablog.com/entry/2013/04/12/141648)
+- [awesome_print](https://github.com/michaeldv/awesome_print) : Use format Hash
+- [anbt-sql-formatter](https://github.com/sonota/anbt-sql-formatter) : Use format SQL
+- [yuroyoro](http://yuroyoro.hatenablog.com/entry/2013/04/12/141648) : Inspired
