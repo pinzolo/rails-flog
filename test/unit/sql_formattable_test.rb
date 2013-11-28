@@ -26,16 +26,38 @@ class SqlFormattableTest < ActiveSupport::TestCase
 
   def test_sql_is_formatted
     Book.where(category: "comics").to_a
-    if ActiveRecord::Base.logger.errors.present?
-      fail ActiveRecord::Base.logger.errors.first
-    else
-      logs = ActiveRecord::Base.logger.debugs.map { |log| log.gsub("\t", "    ") }
+    assert_logger do |logger|
+      logs = logger.debugs.map { |log| log.gsub("\t", "    ") }
       assert_equal %{    SELECT}                             , logs[1]
       assert_equal %{        "books" . *}                    , logs[2]
       assert_equal %{    FROM}                               , logs[3]
       assert_equal %{        "books"}                        , logs[4]
       assert_equal %{    WHERE}                              , logs[5]
       assert_equal %{        "books" . "category" = 'comics'}, logs[6]
+    end
+  end
+
+  def test_colorized_on_colorize_loggin_is_true
+    ActiveSupport::LogSubscriber.colorize_logging = true
+    Book.where(category: "comics").to_a
+    assert_logger do |logger|
+      assert /\e\[(\d+;)*\d+m/.match(logger.debugs.join())
+    end
+  end
+
+  def test_not_colorized_on_colorize_loggin_is_false
+    Book.where(category: "comics").to_a
+    assert_logger do |logger|
+      assert_nil /\e\[(\d+;)*\d+m/.match(logger.debugs.join())
+    end
+  end
+
+  private
+  def assert_logger(&block)
+    if ActiveRecord::Base.logger.errors.present?
+      fail ActiveRecord::Base.logger.errors.first
+    else
+      block.call(ActiveRecord::Base.logger)
     end
   end
 end

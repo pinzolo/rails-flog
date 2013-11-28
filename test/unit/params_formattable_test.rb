@@ -36,15 +36,37 @@ class ParamsFormattableTest < ActionController::TestCase
 
   def test_parameters_log_is_formatted
     get :show, foo: "foo_value", bar: "bar_value"
-    if ActionController::Base.logger.errors.present?
-      fail ActionController::Base.logger.errors.first
-    else
-      logs = ActionController::Base.logger.infos.map { |log| log.gsub(/\e\[(\d+;)*\d+m/, "") }
+    assert_logger do |logger|
+      logs = logger.infos.map { |log| log.gsub(/\e\[(\d+;)*\d+m/, "") }
       assert_equal %(  Parameters: )           , logs[1]
       assert_equal %({)                        , logs[2]
       assert_equal %(    "foo" => "foo_value",), logs[3]
       assert_equal %(    "bar" => "bar_value") , logs[4]
       assert_equal %(})                        , logs[5]
+    end
+  end
+
+  def test_colorized_on_colorize_loggin_is_true
+    ActiveSupport::LogSubscriber.colorize_logging = true
+    get :show, foo: "foo_value", bar: "bar_value"
+    assert_logger do |logger|
+      assert /\e\[(\d+;)*\d+m/.match(logger.infos.join())
+    end
+  end
+
+  def test_not_colorized_on_colorize_loggin_is_false
+    get :show, foo: "foo_value", bar: "bar_value"
+    assert_logger do |logger|
+      assert_nil /\e\[(\d+;)*\d+m/.match(logger.infos.join())
+    end
+  end
+
+  private
+  def assert_logger(&block)
+    if ActionController::Base.logger.errors.present?
+      fail ActionController::Base.logger.errors.first
+    else
+      block.call(ActionController::Base.logger)
     end
   end
 end

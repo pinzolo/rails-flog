@@ -28,7 +28,7 @@ class ActionController::LogSubscriber
         excepted = original_except(*keys)
         class << excepted
           def inspect
-            "\n#{ai}"
+            "\n#{ai(plain: !ActionController::LogSubscriber.colorize_logging)}"
           end
         end
         excepted
