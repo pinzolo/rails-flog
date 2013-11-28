@@ -10,14 +10,18 @@ rails-flog provides feature that formats parameters Hash and SQL in Rails log fi
 ### Before
 
 ```
+# Parameters
 Processing by IssuesController#create as HTML
   Parameters: {"utf8"=>"✓", "authenticity_token"=>"VYCWAsE+aAN+zSZq2H3ONNqaU8rlyfbnXLfbwDY1i10=", "issue"=>{"is_private"=>"0", "tracker_id"=>"1", "subject"=>"test ticket", "description"=>"test ticket description", "status_id"=>"1", "priority_id"=>"2", "assigned_to_id"=>"1", "parent_issue_id"=>"", "start_date"=>"2013-11-28", "due_date"=>"2013-11-29", "estimated_hours"=>"5", "done_ratio"=>"10"}, "commit"=>"Create", "project_id"=>"test"}
-  Setting Load (0.0ms)  SELECT "settings".* FROM "settings" WHERE "settings"."name" = 'session_lifetime' LIMIT 1
+  
+# SQL
+  IssueCustomField Load (0.0ms)  SELECT "custom_fields".* FROM "custom_fields" WHERE "custom_fields"."type" IN ('IssueCustomField') AND (is_for_all = 't' OR id IN (SELECT DISTINCT cfp.custom_field_id FROM custom_fields_projects cfp WHERE cfp.project_id = 1)) ORDER BY custom_fields.position ASC
 ```
 
 ### After
 
 ```
+# Parameters
 Processing by IssuesController#create as HTML
   Parameters:
 {
@@ -40,13 +44,28 @@ Processing by IssuesController#create as HTML
                 "commit" => "Create",
             "project_id" => "test"
 }
-  Setting Load (0.0ms)
+
+# SQL
+  IssueCustomField Load (0.0ms)  
 	SELECT
-		"settings" . *
+		"custom_fields" . *
 	FROM
-		"settings"
+		"custom_fields"
 	WHERE
-		"settings" . "name" = 'session_lifetime' LIMIT 1
+		"custom_fields" . "type" IN ('IssueCustomField')
+		AND (
+			is_for_all = 't'
+			OR id IN (
+				SELECT
+						DISTINCT cfp.custom_field_id
+					FROM
+						custom_fields_projects cfp
+					WHERE
+						cfp.project_id = 1
+			)
+		)
+	ORDER BY
+		custom_fields.position ASC
 ```
 
 ## Installation
