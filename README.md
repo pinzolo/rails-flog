@@ -5,7 +5,7 @@
 
 rails-flog provides feature that formats parameters Hash and SQL in Rails log file.
 
-## Before and after
+## Before and after (Using Redmine)
 
 ### Before
 
