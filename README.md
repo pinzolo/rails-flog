@@ -103,3 +103,8 @@ If you put a file named `no-flog.txt` to `<rails_app>/tmp` direcotry, `rails-flo
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+## Changelog
+
+- v1.0.0  (2013-11-28 JST):  First release
+- v1.1.0  (2013-12-02 JST):  Add feature that disables format by no-flog.txt
