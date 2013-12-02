@@ -70,7 +70,7 @@ Processing by IssuesController#create as HTML
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Add this line to your application's Gemfile:  
 (Recommendation: use only `:development` and `:test` enviroment)
 
     gem 'rails-flog', :require => "flog"
@@ -89,7 +89,7 @@ Just install.
 
 ## Disable temporary
 
-If you put a file named `no-flog.txt` to `tmp` direcotry, `rails-flog` will disable format.
+If you put a file named `no-flog.txt` to `<rails_app>/tmp` direcotry, `rails-flog` will disable format.
 
 ## Supported versions
 
