@@ -13,7 +13,7 @@ rails-flog provides feature that formats parameters Hash and SQL in Rails log fi
 # Parameters
 Processing by IssuesController#create as HTML
   Parameters: {"utf8"=>"✓", "authenticity_token"=>"VYCWAsE+aAN+zSZq2H3ONNqaU8rlyfbnXLfbwDY1i10=", "issue"=>{"is_private"=>"0", "tracker_id"=>"1", "subject"=>"test ticket", "description"=>"test ticket description", "status_id"=>"1", "priority_id"=>"2", "assigned_to_id"=>"1", "parent_issue_id"=>"", "start_date"=>"2013-11-28", "due_date"=>"2013-11-29", "estimated_hours"=>"5", "done_ratio"=>"10"}, "commit"=>"Create", "project_id"=>"test"}
-  
+
 # SQL
   IssueCustomField Load (0.0ms)  SELECT "custom_fields".* FROM "custom_fields" WHERE "custom_fields"."type" IN ('IssueCustomField') AND (is_for_all = 't' OR id IN (SELECT DISTINCT cfp.custom_field_id FROM custom_fields_projects cfp WHERE cfp.project_id = 1)) ORDER BY custom_fields.position ASC
 ```
@@ -46,7 +46,7 @@ Processing by IssuesController#create as HTML
 }
 
 # SQL
-  IssueCustomField Load (0.0ms)  
+  IssueCustomField Load (0.0ms)
 	SELECT
 		"custom_fields" . *
 	FROM
@@ -70,7 +70,7 @@ Processing by IssuesController#create as HTML
 
 ## Installation
 
-Add this line to your application's Gemfile:  
+Add this line to your application's Gemfile:
 (Recommendation: use only `:development` and `:test` enviroment)
 
     gem 'rails-flog', :require => "flog"
@@ -86,6 +86,10 @@ Or install it yourself as:
 ## Usage
 
 Just install.
+
+## Disable temporary
+
+If you put a file named `no-flog.txt` to `tmp` direcotry, `rails-flog` will disable format.
 
 ## Supported versions
 
