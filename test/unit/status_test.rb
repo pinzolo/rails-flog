@@ -5,7 +5,6 @@ class StatusTest < ActiveSupport::TestCase
   def setup
     @test_root = Pathname.new(File.expand_path(File.dirname(__FILE__) + "../../"))
     @switch_file_path = @test_root.join("tmp", Flog::Status::SWITCH_FILE_NAME)
-    File.open(@test_root.join("tmp", ".gitkeep").to_s, "w").close
   end
 
   def teardown
