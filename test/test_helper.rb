@@ -10,6 +10,7 @@ end
 Bundler.require
 require "flog"
 require "test/unit"
+require "mocha/setup"
 
 class TestLogger
   attr_accessor :debugs, :infos, :errors

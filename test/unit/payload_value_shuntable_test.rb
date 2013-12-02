@@ -2,7 +2,7 @@
 require "test_helper"
 
 class TestClass
-  include PayloadValueShuntable
+  include Flog::PayloadValueShuntable
 end
 
 class PayloadValueShuntableTest < ActiveSupport::TestCase

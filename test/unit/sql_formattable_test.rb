@@ -52,6 +52,14 @@ class SqlFormattableTest < ActiveSupport::TestCase
     end
   end
 
+  def test_sql_is_not_formatted_when_enabled_is_false
+    Flog::Status.expects(:enabled?).returns(false)
+    Book.where(category: "comics").to_a
+    assert_logger do |logger|
+      assert logger.debugs.first.include?(%(SELECT "books".* FROM "books" WHERE "books"."category" = 'comics'))
+    end
+  end
+
   private
   def assert_logger(&block)
     if ActiveRecord::Base.logger.errors.present?

@@ -3,11 +3,13 @@ require "active_record/log_subscriber"
 require "flog/payload_value_shuntable"
 
 class ActiveRecord::LogSubscriber
-  include PayloadValueShuntable
+  include Flog::PayloadValueShuntable
 
   alias :original_sql :sql
 
   def sql(event)
+    return original_sql(event) unless Flog::Status.enabled?
+
     formatted = format_sql(event.payload[:sql])
 
     shunt_payload_value(event.payload, :sql, "\n\t#{formatted}") do
