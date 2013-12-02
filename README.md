@@ -103,9 +103,3 @@ If you put a file named `no-flog.txt` to `<rails_app>/tmp` direcotry, `rails-flo
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
-
-## Thanks
-
-- [awesome_print](https://github.com/michaeldv/awesome_print) : Use format Hash
-- [anbt-sql-formatter](https://github.com/sonota/anbt-sql-formatter) : Use format SQL
-- [yuroyoro](http://yuroyoro.hatenablog.com/entry/2013/04/12/141648) : Inspired
