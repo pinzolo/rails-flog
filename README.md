@@ -70,7 +70,7 @@ Processing by IssuesController#create as HTML
 
 ## Installation
 
-Add this line to your application's Gemfile:  
+Add this line to your application's Gemfile:
 (Recommendation: use only `:development` and `:test` enviroment)
 
     gem 'rails-flog', :require => "flog"
@@ -108,3 +108,4 @@ If you put a file named `no-flog.txt` to `<rails_app>/tmp` direcotry, `rails-flo
 
 - v1.0.0  (2013-11-28 JST):  First release
 - v1.1.0  (2013-12-02 JST):  Add feature that disables format by no-flog.txt
+- v1.1.1  (2013-12-06 JST):  Change to alias_method_change from alias for method aliasing
