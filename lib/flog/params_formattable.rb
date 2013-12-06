@@ -7,17 +7,16 @@ require "flog/status"
 class ActionController::LogSubscriber
   include Flog::PayloadValueShuntable
 
-  alias :original_start_processing :start_processing
-
-  def start_processing(event)
-    return original_start_processing(event) unless Flog::Status.enabled?
+  def start_processing_with_flog(event)
+    return start_processing_without_flog(event) unless Flog::Status.enabled?
 
     replaced = replace_params(event.payload[:params])
 
     shunt_payload_value(event.payload, :params, replaced) do
-      original_start_processing(event)
+      start_processing_without_flog(event)
     end
   end
+  alias_method_chain :start_processing, :flog
 
   private
   def replace_params(params)
