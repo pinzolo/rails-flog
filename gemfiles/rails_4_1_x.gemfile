@@ -1,0 +1,8 @@
+source "https://rubygems.org"
+
+gem "rails", "~>4.1.0"
+gem "anbt-sql-formatter"
+gem "awesome_print"
+
+gemspec :path => "../"
+
