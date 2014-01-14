@@ -6,7 +6,7 @@ class ActiveRecord::LogSubscriber
   include Flog::PayloadValueShuntable
 
   def sql_with_flog(event)
-    return sql_without_flog(event) unless Flog::Status.enabled?
+    return sql_without_flog(event) unless Flog::Status.sql_formattable?
 
     formatted = format_sql(event.payload[:sql])
 

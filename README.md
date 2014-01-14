@@ -89,7 +89,9 @@ Just install.
 
 ## Disable temporary
 
-If you put a file named `no-flog.txt` to `<rails_app>/tmp` direcotry, `rails-flog` will disable format.
+If you put a file named `no-flog-sql.txt` to `<rails_app>/tmp` direcotry, `rails-flog` will disable SQL format (Parameters format is enabled).  
+If you put a file named `no-flog-params.txt` to `<rails_app>/tmp` direcotry, `rails-flog` will disable parameters format (SQL format is enabled).  
+If you put a file named `no-flog.txt` to `<rails_app>/tmp` direcotry, `rails-flog` will disable both format.
 
 ## Supported versions
 
@@ -109,3 +111,4 @@ If you put a file named `no-flog.txt` to `<rails_app>/tmp` direcotry, `rails-flo
 - v1.0.0  (2013-11-28 JST):  First release
 - v1.1.0  (2013-12-02 JST):  Add feature that disables format by no-flog.txt
 - v1.1.1  (2013-12-06 JST):  Change to alias_method_change from alias for method aliasing
+- v1.2.0  (2014-01-14 JST):  Add feature that disables format partially by no-flog-sql.txt and no-flog-params.txt

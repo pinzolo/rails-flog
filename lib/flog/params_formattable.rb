@@ -8,7 +8,7 @@ class ActionController::LogSubscriber
   include Flog::PayloadValueShuntable
 
   def start_processing_with_flog(event)
-    return start_processing_without_flog(event) unless Flog::Status.enabled?
+    return start_processing_without_flog(event) unless Flog::Status.params_formattable?
 
     replaced = replace_params(event.payload[:params])
 
