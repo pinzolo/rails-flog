@@ -95,7 +95,7 @@ If you put a file to `<rails_app>/tmp` direcotry, `rails-flog` will disable form
 |:------------------|:----------|
 |no-flog-sql.txt    |SQL        |
 |no-flog-params.txt |Parameters |
-|no-flog            |Both       |
+|no-flog.txt        |Both       |
 
 ## Supported versions
 
