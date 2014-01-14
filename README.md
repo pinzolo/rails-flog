@@ -89,9 +89,13 @@ Just install.
 
 ## Disable temporary
 
-If you put a file named `no-flog-sql.txt` to `<rails_app>/tmp` direcotry, `rails-flog` will disable SQL format (Parameters format is enabled).  
-If you put a file named `no-flog-params.txt` to `<rails_app>/tmp` direcotry, `rails-flog` will disable parameters format (SQL format is enabled).  
-If you put a file named `no-flog.txt` to `<rails_app>/tmp` direcotry, `rails-flog` will disable both format.
+If you put a file to `<rails_app>/tmp` direcotry, `rails-flog` will disable format.
+
+|File name          |Feature    |
+|:------------------|:----------|
+|no-flog-sql.txt    |SQL        |
+|no-flog-params.txt |Parameters |
+|no-flog            |Both       |
 
 ## Supported versions
 
