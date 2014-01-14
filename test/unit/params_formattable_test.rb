@@ -69,6 +69,14 @@ class ParamsFormattableTest < ActionController::TestCase
     end
   end
 
+  def test_parameters_log_is_not_formatted_when_params_formattable_is_false
+    Flog::Status.expects(:params_formattable?).returns(false)
+    get :show, foo: "foo_value", bar: "bar_value"
+    assert_logger do |logger|
+      assert logger.infos[1].include?(%(Parameters: {"foo"=>"foo_value", "bar"=>"bar_value"}))
+    end
+  end
+
   private
   def assert_logger(&block)
     if ActionController::Base.logger.errors.present?
