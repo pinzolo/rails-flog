@@ -99,7 +99,7 @@ If you put a file to `<rails_app>/tmp` direcotry, `rails-flog` will disable form
 
 ## Supported versions
 
-- Ruby: 1.9.3, 2.0.0
+- Ruby: 1.9.3, 2.0.0, 2.1.0
 - Rails: 3.2.x, 4.0.x
 
 ## Contributing
