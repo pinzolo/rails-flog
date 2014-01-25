@@ -18,6 +18,10 @@ class SqlFormattableTest < ActiveSupport::TestCase
     @old_logger = ActiveRecord::Base.logger
     ActiveSupport::LogSubscriber.colorize_logging = false
     ActiveRecord::Base.logger = TestLogger.new
+    # default configuration
+    Flog.configure do |config|
+      config.ignore_cached_query = true
+    end
   end
 
   def teardown
@@ -65,6 +69,48 @@ class SqlFormattableTest < ActiveSupport::TestCase
     Book.where(category: "comics").to_a
     assert_logger do |logger|
       assert logger.debugs.first.include?(%(SELECT "books".* FROM "books" WHERE "books"."category" = 'comics'))
+    end
+  end
+
+  def test_sql_is_not_formatted_on_cached_query
+    Book.cache do
+      Book.where(category: "comics").to_a
+      Book.where(category: "comics").to_a
+    end
+    assert_logger do |logger|
+      logs = logger.debugs.map { |log| log.gsub("\t", "    ") }
+      assert_equal %{    SELECT}                             , logs[1]
+      assert_equal %{        "books" . *}                    , logs[2]
+      assert_equal %{    FROM}                               , logs[3]
+      assert_equal %{        "books"}                        , logs[4]
+      assert_equal %{    WHERE}                              , logs[5]
+      assert_equal %{        "books" . "category" = 'comics'}, logs[6]
+      assert logs[7].include?(%(SELECT "books".* FROM "books" WHERE "books"."category" = 'comics'))
+    end
+  end
+
+  def test_sql_is_formatted_on_cached_query_when_ignore_cached_query_configration_is_false
+    Flog.configure do |config|
+      config.ignore_cached_query = false
+    end
+    Book.cache do
+      Book.where(category: "comics").to_a
+      Book.where(category: "comics").to_a
+    end
+    assert_logger do |logger|
+      logs = logger.debugs.map { |log| log.gsub("\t", "    ") }
+      assert_equal %{    SELECT}                             , logs[1]
+      assert_equal %{        "books" . *}                    , logs[2]
+      assert_equal %{    FROM}                               , logs[3]
+      assert_equal %{        "books"}                        , logs[4]
+      assert_equal %{    WHERE}                              , logs[5]
+      assert_equal %{        "books" . "category" = 'comics'}, logs[6]
+      assert_equal %{    SELECT}                             , logs[8]
+      assert_equal %{        "books" . *}                    , logs[9]
+      assert_equal %{    FROM}                               , logs[10]
+      assert_equal %{        "books"}                        , logs[11]
+      assert_equal %{    WHERE}                              , logs[12]
+      assert_equal %{        "books" . "category" = 'comics'}, logs[13]
     end
   end
 

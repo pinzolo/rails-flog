@@ -6,7 +6,7 @@ class ActiveRecord::LogSubscriber
   include Flog::PayloadValueShuntable
 
   def sql_with_flog(event)
-    return sql_without_flog(event) unless Flog::Status.sql_formattable?
+    return sql_without_flog(event) unless formattable?(event)
 
     formatted = format_sql(event.payload[:sql])
 
@@ -28,5 +28,15 @@ class ActiveRecord::LogSubscriber
     end
     rule.indent_string = "\t"
     AnbtSql::Formatter.new(rule).format(sql.squeeze(" "))
+  end
+
+  def formattable?(event)
+    return false unless Flog::Status.sql_formattable?
+
+    if Flog.config.ignore_cached_query?
+      event.payload[:name] != "CACHE"
+    else
+      true
+    end
   end
 end
