@@ -18,6 +18,11 @@ end
 
 class ParamsFormattableTest < ActionController::TestCase
   def setup
+    # default configuration
+    Flog.configure do |config|
+      config.params_key_count_threshold = 1
+    end
+
     @old_logger = ActionController::Base.logger
     ActiveSupport::LogSubscriber.colorize_logging = false
     @routes = ActionDispatch::Routing::RouteSet.new
@@ -71,6 +76,26 @@ class ParamsFormattableTest < ActionController::TestCase
 
   def test_parameters_log_is_not_formatted_when_params_formattable_is_false
     Flog::Status.expects(:params_formattable?).returns(false)
+    get :show, foo: "foo_value", bar: "bar_value"
+    assert_logger do |logger|
+      assert logger.infos[1].include?(%(Parameters: {"foo"=>"foo_value", "bar"=>"bar_value"}))
+    end
+  end
+
+  def test_parameters_log_is_not_formatted_when_key_of_parameters_count_equals_to_configured_threshold
+    Flog.configure do |config|
+      config.params_key_count_threshold = 2
+    end
+    get :show, foo: "foo_value", bar: "bar_value"
+    assert_logger do |logger|
+      assert logger.infos[1].include?(%(Parameters: {"foo"=>"foo_value", "bar"=>"bar_value"}))
+    end
+  end
+
+  def test_parameters_log_is_not_formatted_when_key_of_parameters_count_is_under_configured_threshold
+    Flog.configure do |config|
+      config.params_key_count_threshold = 3
+    end
     get :show, foo: "foo_value", bar: "bar_value"
     assert_logger do |logger|
       assert logger.infos[1].include?(%(Parameters: {"foo"=>"foo_value", "bar"=>"bar_value"}))

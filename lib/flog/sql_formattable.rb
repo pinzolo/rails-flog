@@ -37,6 +37,6 @@ class ActiveRecord::LogSubscriber
       return false
     end
 
-    Flog.config.query_duration_threshold.to_f <= event.duration
+    event.duration >= Flog.config.query_duration_threshold.to_f
   end
 end

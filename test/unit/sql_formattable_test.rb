@@ -15,14 +15,15 @@ class Book < ActiveRecord::Base; end
 
 class SqlFormattableTest < ActiveSupport::TestCase
   def setup
-    @old_logger = ActiveRecord::Base.logger
-    ActiveSupport::LogSubscriber.colorize_logging = false
-    ActiveRecord::Base.logger = TestLogger.new
     # default configuration
     Flog.configure do |config|
       config.ignore_cached_query = true
       config.query_duration_threshold = 0.0
     end
+
+    @old_logger = ActiveRecord::Base.logger
+    ActiveSupport::LogSubscriber.colorize_logging = false
+    ActiveRecord::Base.logger = TestLogger.new
   end
 
   def teardown

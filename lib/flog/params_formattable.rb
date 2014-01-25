@@ -2,13 +2,12 @@
 require "action_controller/log_subscriber"
 require "awesome_print"
 require "flog/payload_value_shuntable"
-require "flog/status"
 
 class ActionController::LogSubscriber
   include Flog::PayloadValueShuntable
 
   def start_processing_with_flog(event)
-    return start_processing_without_flog(event) unless Flog::Status.params_formattable?
+    return start_processing_without_flog(event) unless formattable?(event)
 
     replaced = replace_params(event.payload[:params])
 
@@ -37,5 +36,14 @@ class ActionController::LogSubscriber
       end
     end
     replaced
+  end
+
+  def formattable?(event)
+    return false unless Flog::Status.params_formattable?
+
+    threshold = Flog.config.params_key_count_threshold.to_i
+    threshold += 1 if event.payload[:params].keys.include?("controller")
+    threshold += 1 if event.payload[:params].keys.include?("action")
+    event.payload[:params].keys.size > threshold
   end
 end

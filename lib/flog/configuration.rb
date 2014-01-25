@@ -2,11 +2,12 @@
 module Flog
   class Configuration
     attr_writer :ignore_cached_query
-    attr_accessor :query_duration_threshold
+    attr_accessor :query_duration_threshold, :params_key_count_threshold
 
     def initialize
       @ignore_cached_query = true
       @query_duration_threshold = 0.0
+      @params_key_count_threshold = 1
     end
 
     def ignore_cached_query?
