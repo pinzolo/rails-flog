@@ -115,7 +115,7 @@ end
 
 ## Disable temporary
 
-If you put a file to `<rails_app>/tmp` direcotry, `rails-flog` will disable format.
+If you put a file to `<rails_app>/tmp` direcotry, `rails-flog` will disable format.  
 Priority of this feature is higher than configurations.
 
 |File name          |Feature    |
