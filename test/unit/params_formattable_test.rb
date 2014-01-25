@@ -21,6 +21,7 @@ class ParamsFormattableTest < ActionController::TestCase
     # default configuration
     Flog.configure do |config|
       config.params_key_count_threshold = 1
+      config.force_on_nested_params = true
     end
 
     @old_logger = ActionController::Base.logger
@@ -99,6 +100,24 @@ class ParamsFormattableTest < ActionController::TestCase
     get :show, foo: "foo_value", bar: "bar_value"
     assert_logger do |logger|
       assert logger.infos[1].include?(%(Parameters: {"foo"=>"foo_value", "bar"=>"bar_value"}))
+    end
+  end
+
+  def test_parameters_log_is_formatted_when_key_of_parameters_count_is_under_configured_threshold_but_force_on_nested_params_configuration_is_true
+    Flog.configure do |config|
+      config.params_key_count_threshold = 3
+    end
+    get :show, foo: "foo_value", bar: { prop: "prop_value", attr: "attr_value" }
+    assert_logger do |logger|
+      logs = logger.infos.map { |log| log.gsub(/\e\[(\d+;)*\d+m/, "") }
+      assert_equal %(  Parameters: )                 , logs[1]
+      assert_equal %({)                              , logs[2]
+      assert_equal %(    "foo" => "foo_value",)      , logs[3]
+      assert_equal %(    "bar" => {)                 , logs[4]
+      assert_equal %(        "prop" => "prop_value",), logs[5]
+      assert_equal %(        "attr" => "attr_value") , logs[6]
+      assert_equal %(    })                          , logs[7]
+      assert_equal %(})                              , logs[8]
     end
   end
 
