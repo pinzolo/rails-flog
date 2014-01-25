@@ -33,10 +33,10 @@ class ActiveRecord::LogSubscriber
   def formattable?(event)
     return false unless Flog::Status.sql_formattable?
 
-    if Flog.config.ignore_cached_query?
-      event.payload[:name] != "CACHE"
-    else
-      true
+    if event.payload[:name] == "CACHE" && Flog.config.ignore_cached_query?
+      return false
     end
+
+    Flog.config.query_duration_threshold.to_f <= event.duration
   end
 end

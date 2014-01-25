@@ -21,6 +21,7 @@ class SqlFormattableTest < ActiveSupport::TestCase
     # default configuration
     Flog.configure do |config|
       config.ignore_cached_query = true
+      config.query_duration_threshold = 0.0
     end
   end
 
@@ -111,6 +112,16 @@ class SqlFormattableTest < ActiveSupport::TestCase
       assert_equal %{        "books"}                        , logs[11]
       assert_equal %{    WHERE}                              , logs[12]
       assert_equal %{        "books" . "category" = 'comics'}, logs[13]
+    end
+  end
+
+  def test_sql_is_not_formatted_when_duration_is_under_threshold
+    Flog.configure do |config|
+      config.query_duration_threshold = 100.0
+    end
+    Book.where(category: "comics").to_a
+    assert_logger do |logger|
+      assert logger.debugs.first.include?(%(SELECT "books".* FROM "books" WHERE "books"."category" = 'comics'))
     end
   end
 
