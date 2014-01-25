@@ -41,10 +41,18 @@ class ActionController::LogSubscriber
   def formattable?(event)
     return false unless Flog::Status.params_formattable?
 
-    if Flog.config.force_on_nested_params?
-      return true if event.payload[:params].values.any? { |value| value.is_a?(Hash) }
-    end
+    return true if force_format_by_nested_params?(event)
 
+    key_count_over?(event)
+  end
+
+  def force_format_by_nested_params?(event)
+    return false unless Flog.config.force_on_nested_params?
+
+    event.payload[:params].values.any? { |value| value.is_a?(Hash) }
+  end
+
+  def key_count_over?(event)
     threshold = Flog.config.params_key_count_threshold.to_i
     threshold += 1 if event.payload[:params].keys.include?("controller")
     threshold += 1 if event.payload[:params].keys.include?("action")

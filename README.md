@@ -144,4 +144,4 @@ Priority of this feature is higher than configurations.
 - v1.1.1  (2013-12-06 JST):  Change to alias_method_change from alias for method aliasing
 - v1.2.0  (2014-01-14 JST):  Add feature that disables format partially by no-flog-sql.txt and no-flog-params.txt
 - v1.3.0  (2014-01-26 JST):  Add configuration
-
+- v1.3.1  (2014-01-27 JST):  Refactored
