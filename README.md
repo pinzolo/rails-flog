@@ -87,6 +87,32 @@ Or install it yourself as:
 
 Just install.
 
+## Configuration
+
+Configure in your environment file (ex. `config/environments/development.rb`)
+
+```ruby
+Flog.configure do |config|
+  # If this value is true, not format on cached query
+  config.ignore_cached_query = false
+  # If query duration is under this value, not format
+  config.query_duration_threshold = 2.0
+  # If key count of parameters is under this value, not format
+  config.params_key_count_threshold = 2
+  # If this value is true, force format in any situation
+  config.force_on_nested_params = false
+end
+```
+
+### Default value
+
+|Attribute                  |Data type |Default value |
+|:--------------------------|:---------|:-------------|
+|ignore_cached_query        |boolean   |true          |
+|query_duration_threshold   |float     |0.0           |
+|params_key_count_threshold |integer   |1             |
+|force_on_nested_params     |boolean   |true          |
+
 ## Disable temporary
 
 If you put a file to `<rails_app>/tmp` direcotry, `rails-flog` will disable format.
@@ -116,3 +142,5 @@ If you put a file to `<rails_app>/tmp` direcotry, `rails-flog` will disable form
 - v1.1.0  (2013-12-02 JST):  Add feature that disables format by no-flog.txt
 - v1.1.1  (2013-12-06 JST):  Change to alias_method_change from alias for method aliasing
 - v1.2.0  (2014-01-14 JST):  Add feature that disables format partially by no-flog-sql.txt and no-flog-params.txt
+- v1.3.0  (2014-01-26 JST):  Add configuration
+
