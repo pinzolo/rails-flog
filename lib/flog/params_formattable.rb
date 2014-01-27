@@ -54,8 +54,7 @@ class ActionController::LogSubscriber
 
   def key_count_over?(event)
     threshold = Flog.config.params_key_count_threshold.to_i
-    threshold += 1 if event.payload[:params].keys.include?("controller")
-    threshold += 1 if event.payload[:params].keys.include?("action")
-    event.payload[:params].keys.size > threshold
+    params = event.payload[:params].except(*INTERNAL_PARAMS)
+    params.keys.size > threshold
   end
 end
