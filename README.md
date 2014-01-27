@@ -99,7 +99,7 @@ Flog.configure do |config|
   config.query_duration_threshold = 2.0
   # If key count of parameters is under this value, not format
   config.params_key_count_threshold = 2
-  # If this value is true, force format in any situation
+  # If this value is true, nested Hash parameter is formatted coercively in any situation
   config.force_on_nested_params = false
 end
 ```
