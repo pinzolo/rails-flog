@@ -5,7 +5,7 @@
 
 rails-flog provides feature that formats parameters Hash and SQL in Rails log file.
 
-## Before and after (Sampla app: Redmine)
+## Before and after (Sample app: Redmine)
 
 ### Before (Default)
 
@@ -70,7 +70,7 @@ Processing by IssuesController#create as HTML
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Add this line to your application's Gemfile:  
 (Recommendation: use only `:development` and `:test` enviroment)
 
     gem 'rails-flog', :require => "flog"
