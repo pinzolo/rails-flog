@@ -70,7 +70,7 @@ Processing by IssuesController#create as HTML
 
 ## Installation
 
-Add this line to your application's Gemfile:  
+Add this line to your application's Gemfile:
 (Recommendation: use only `:development` and `:test` enviroment)
 
     gem 'rails-flog', :require => "flog"
@@ -115,7 +115,7 @@ end
 
 ## Disable temporary
 
-If you put a file to `<rails_app>/tmp` direcotry, `rails-flog` will disable format.  
+If you put a file to `<rails_app>/tmp` direcotry, `rails-flog` will disable format.
 Priority of this feature is higher than configurations.
 
 |File name          |Feature    |
@@ -127,7 +127,7 @@ Priority of this feature is higher than configurations.
 ## Supported versions
 
 - Ruby: 1.9.3, 2.0.0, 2.1.0
-- Rails: 3.2.x, 4.0.x
+- Rails: 3.2.x, 4.0.x, 4.1.x
 
 ## Contributing
 
@@ -145,3 +145,4 @@ Priority of this feature is higher than configurations.
 - v1.2.0  (2014-01-14 JST):  Add feature that disables format partially by no-flog-sql.txt and no-flog-params.txt
 - v1.3.0  (2014-01-26 JST):  Add configuration
 - v1.3.1  (2014-01-27 JST):  Refactored
+- v1.3.2  (2014-04-28 JST):  Confirm with Rails 4.1

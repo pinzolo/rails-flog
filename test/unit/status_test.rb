@@ -1,5 +1,6 @@
 # coding: utf-8
 require "rails"
+require "test_helper"
 
 class StatusTest < ActiveSupport::TestCase
   def setup

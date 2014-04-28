@@ -9,8 +9,8 @@ end
 
 Bundler.require
 require "flog"
-require "test/unit"
-require "mocha/setup"
+require "minitest/autorun"
+require "mocha/api"
 
 class TestLogger
   attr_accessor :debugs, :infos, :errors

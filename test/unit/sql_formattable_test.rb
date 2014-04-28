@@ -59,18 +59,18 @@ class SqlFormattableTest < ActiveSupport::TestCase
   end
 
   def test_sql_is_not_formatted_when_enabled_is_false
-    Flog::Status.expects(:enabled?).returns(false)
+    Flog::Status.stubs(:enabled?).returns(false)
     Book.where(category: "comics").to_a
     assert_logger do |logger|
-      assert logger.debugs.first.include?(%(SELECT "books".* FROM "books" WHERE "books"."category" = 'comics'))
+      assert_one_line_sql logger.debugs.first
     end
   end
 
   def test_sql_is_not_formatted_when_sql_formattable_is_false
-    Flog::Status.expects(:sql_formattable?).returns(false)
+    Flog::Status.stubs(:sql_formattable?).returns(false)
     Book.where(category: "comics").to_a
     assert_logger do |logger|
-      assert logger.debugs.first.include?(%(SELECT "books".* FROM "books" WHERE "books"."category" = 'comics'))
+      assert_one_line_sql logger.debugs.first
     end
   end
 
@@ -81,13 +81,9 @@ class SqlFormattableTest < ActiveSupport::TestCase
     end
     assert_logger do |logger|
       logs = logger.debugs.map { |log| log.gsub("\t", "    ") }
-      assert_equal %{    SELECT}                             , logs[1]
-      assert_equal %{        "books" . *}                    , logs[2]
-      assert_equal %{    FROM}                               , logs[3]
-      assert_equal %{        "books"}                        , logs[4]
-      assert_equal %{    WHERE}                              , logs[5]
-      assert_equal %{        "books" . "category" = 'comics'}, logs[6]
-      assert logs[7].include?(%(SELECT "books".* FROM "books" WHERE "books"."category" = 'comics'))
+      logs.each do |log|
+        assert_one_line_sql log if log.include?("CACHE")
+      end
     end
   end
 
@@ -101,18 +97,9 @@ class SqlFormattableTest < ActiveSupport::TestCase
     end
     assert_logger do |logger|
       logs = logger.debugs.map { |log| log.gsub("\t", "    ") }
-      assert_equal %{    SELECT}                             , logs[1]
-      assert_equal %{        "books" . *}                    , logs[2]
-      assert_equal %{    FROM}                               , logs[3]
-      assert_equal %{        "books"}                        , logs[4]
-      assert_equal %{    WHERE}                              , logs[5]
-      assert_equal %{        "books" . "category" = 'comics'}, logs[6]
-      assert_equal %{    SELECT}                             , logs[8]
-      assert_equal %{        "books" . *}                    , logs[9]
-      assert_equal %{    FROM}                               , logs[10]
-      assert_equal %{        "books"}                        , logs[11]
-      assert_equal %{    WHERE}                              , logs[12]
-      assert_equal %{        "books" . "category" = 'comics'}, logs[13]
+      logs.each do |log|
+        assert_equal log.include?("SELECT"), false if log.include?("CACHE")
+      end
     end
   end
 
@@ -122,7 +109,7 @@ class SqlFormattableTest < ActiveSupport::TestCase
     end
     Book.where(category: "comics").to_a
     assert_logger do |logger|
-      assert logger.debugs.first.include?(%(SELECT "books".* FROM "books" WHERE "books"."category" = 'comics'))
+      assert_one_line_sql logger.debugs.first
     end
   end
 
@@ -133,5 +120,11 @@ class SqlFormattableTest < ActiveSupport::TestCase
     else
       block.call(ActiveRecord::Base.logger)
     end
+  end
+
+  def assert_one_line_sql(sql)
+    assert sql.include?("SELECT")
+    assert sql.include?("FROM")
+    assert sql.include?("WHERE")
   end
 end
