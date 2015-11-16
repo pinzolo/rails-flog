@@ -7,7 +7,6 @@ SimpleCov.start do
   add_filter '/bundle/'
 end
 
-Bundler.require
 require "flog"
 require "minitest/autorun"
 
