@@ -9,7 +9,10 @@ end
 
 Bundler.require
 require "flog"
-require "minitest/autorun"
+begin
+  require "minitest/autorun"
+rescue
+end
 
 class TestLogger
   attr_accessor :debugs, :infos, :errors
