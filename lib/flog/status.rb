@@ -25,9 +25,21 @@ module Flog
       true
     end
 
+    def self.switch_file_base_path
+      if Rails.root && Rails.root.exist?
+        Rails.root
+      else
+        Pathname.new(File.expand_path(File.dirname(__FILE__) + "../../"))
+      end
+    end
+
+    def self.switch_file_dir_path
+      switch_file_base_path.join("tmp")
+    end
+
     private
     def self.switch_file_exists?(file_name)
-      File.exist?(Rails.root.join("tmp", file_name).to_s)
+      switch_file_dir_path.join(file_name).exist?
     end
   end
 end

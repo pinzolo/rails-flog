@@ -61,25 +61,29 @@ class ParamsFormattableTest < ActionController::TestCase
   end
 
   def test_not_colorized_on_colorize_loggin_is_false
-    get :show, foo: "foo_value", bar: "bar_value"
-    assert_logger do |logger|
-      assert_nil /\e\[(\d+;)*\d+m/.match(logger.infos.join())
+    Flog::Status.stub(:enabled?, true) do
+      get :show, foo: "foo_value", bar: "bar_value"
+      assert_logger do |logger|
+        assert_nil /\e\[(\d+;)*\d+m/.match(logger.infos.join())
+      end
     end
   end
 
   def test_parameters_log_is_not_formatted_when_enabled_is_false
-    Flog::Status.stubs(:enabled?).returns(false)
-    get :show, foo: "foo_value", bar: "bar_value"
-    assert_logger do |logger|
-      assert logger.infos[1].include?(%(Parameters: {"foo"=>"foo_value", "bar"=>"bar_value"}))
+    Flog::Status.stub(:enabled?, false) do
+      get :show, foo: "foo_value", bar: "bar_value"
+      assert_logger do |logger|
+        assert logger.infos[1].include?(%(Parameters: {"foo"=>"foo_value", "bar"=>"bar_value"}))
+      end
     end
   end
 
   def test_parameters_log_is_not_formatted_when_params_formattable_is_false
-    Flog::Status.stubs(:params_formattable?).returns(false)
-    get :show, foo: "foo_value", bar: "bar_value"
-    assert_logger do |logger|
-      assert logger.infos[1].include?(%(Parameters: {"foo"=>"foo_value", "bar"=>"bar_value"}))
+    Flog::Status.stub(:params_formattable?, false) do
+      get :show, foo: "foo_value", bar: "bar_value"
+      assert_logger do |logger|
+        assert logger.infos[1].include?(%(Parameters: {"foo"=>"foo_value", "bar"=>"bar_value"}))
+      end
     end
   end
 

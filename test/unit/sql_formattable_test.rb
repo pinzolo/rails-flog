@@ -39,7 +39,7 @@ class SqlFormattableTest < ActiveSupport::TestCase
       assert_equal %{    FROM}                               , logs[3]
       assert_equal %{        "books"}                        , logs[4]
       assert_equal %{    WHERE}                              , logs[5]
-      assert_equal %{        "books" . "category" = 'comics'}, logs[6]
+      assert logs[6].start_with?(%{        "books" . "category" = })
     end
   end
 
@@ -59,18 +59,20 @@ class SqlFormattableTest < ActiveSupport::TestCase
   end
 
   def test_sql_is_not_formatted_when_enabled_is_false
-    Flog::Status.stubs(:enabled?).returns(false)
-    Book.where(category: "comics").to_a
-    assert_logger do |logger|
-      assert_one_line_sql logger.debugs.first
+    Flog::Status.stub(:enabled?, false) do
+      Book.where(category: "comics").to_a
+      assert_logger do |logger|
+        assert_one_line_sql logger.debugs.first
+      end
     end
   end
 
   def test_sql_is_not_formatted_when_sql_formattable_is_false
-    Flog::Status.stubs(:sql_formattable?).returns(false)
-    Book.where(category: "comics").to_a
-    assert_logger do |logger|
-      assert_one_line_sql logger.debugs.first
+    Flog::Status.stub(:sql_formattable?, false) do
+      Book.where(category: "comics").to_a
+      assert_logger do |logger|
+        assert_one_line_sql logger.debugs.first
+      end
     end
   end
 
