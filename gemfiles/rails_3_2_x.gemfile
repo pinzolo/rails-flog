@@ -1,7 +1,10 @@
 source "https://rubygems.org"
 
-gem "rails", "~>3.2.0"
-gem "anbt-sql-formatter"
-gem "awesome_print"
+gem "rails", "~> 3.2.0"
+
+group :test do
+  gem "minitest", "~> 4.7.5"
+  gem "test-unit", "~> 3.0"
+end
 
 gemspec :path => "../"

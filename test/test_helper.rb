@@ -7,10 +7,8 @@ SimpleCov.start do
   add_filter '/bundle/'
 end
 
-Bundler.require
 require "flog"
 require "minitest/autorun"
-require "mocha/api"
 
 class TestLogger
   attr_accessor :debugs, :infos, :errors
@@ -30,14 +28,14 @@ class TestLogger
   end
 
   def debug(message)
-    @debugs += message.split("\n")
+    @debugs += message.split("\n") if message
   end
 
   def info(message)
-    @infos += message.split("\n")
+    @infos += message.split("\n") if message
   end
 
   def error(message)
-    @errors += message.split("\n")
+    @errors += message.split("\n") if message
   end
 end
