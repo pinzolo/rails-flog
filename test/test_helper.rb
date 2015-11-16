@@ -11,7 +11,7 @@ Bundler.require
 require "flog"
 begin
   require "minitest/autorun"
-rescue
+rescue LoadError
 end
 
 class TestLogger
