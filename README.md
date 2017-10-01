@@ -126,7 +126,7 @@ Priority of this feature is higher than configurations.
 
 ## Supported versions
 
-- Ruby: 1.9.3, 2.0.x, 2.1.x, 2.2.x
+- Ruby: 2.0.x, 2.1.x, 2.2.x
 - Rails: 3.2.x, 4.0.x, 4.1.x, 4.2.x
 
 ## Contributing
@@ -147,3 +147,4 @@ Priority of this feature is higher than configurations.
 - v1.3.1  (2014-01-27 JST):  Refactored
 - v1.3.2  (2014-04-28 JST):  Confirm with Rails 4.1
 - v1.3.3  (2015-11-16 JST):  Confirm with Rails 4.2
+- v1.4.0  (2017-10-01 JST):  Compatible for Rails 5.0 and Rails 5.1, and dropped Ruby 1.9.3 support
