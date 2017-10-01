@@ -43,7 +43,7 @@ class ParamsFormattableTest < ActionController::TestCase
   def test_parameters_log_is_formatted
     get :show, foo: "foo_value", bar: "bar_value"
     assert_logger do |logger|
-      logs = logger.infos.map { |log| log.gsub(/\e\[(\d+;)*\d+m/, "") }
+      logs = logger.infos.map { |log| remove_color_seq(log) }
       assert_equal %(  Parameters: )           , logs[1]
       assert_equal %({)                        , logs[2]
       assert_equal %(    "foo" => "foo_value",), logs[3]
@@ -56,7 +56,7 @@ class ParamsFormattableTest < ActionController::TestCase
     ActiveSupport::LogSubscriber.colorize_logging = true
     get :show, foo: "foo_value", bar: "bar_value"
     assert_logger do |logger|
-      assert /\e\[(\d+;)*\d+m/.match(logger.infos.join())
+      assert match_color_seq(logger.infos.join())
     end
   end
 
@@ -64,7 +64,7 @@ class ParamsFormattableTest < ActionController::TestCase
     Flog::Status.stub(:enabled?, true) do
       get :show, foo: "foo_value", bar: "bar_value"
       assert_logger do |logger|
-        assert_nil /\e\[(\d+;)*\d+m/.match(logger.infos.join())
+        assert_nil match_color_seq(logger.infos.join())
       end
     end
   end
@@ -113,7 +113,7 @@ class ParamsFormattableTest < ActionController::TestCase
     end
     get :show, foo: "foo_value", bar: { prop: "prop_value", attr: "attr_value" }
     assert_logger do |logger|
-      logs = logger.infos.map { |log| log.gsub(/\e\[(\d+;)*\d+m/, "") }
+      logs = logger.infos.map { |log| remove_color_seq(log) }
       assert_equal %(  Parameters: )                 , logs[1]
       assert_equal %({)                              , logs[2]
       assert_equal %(    "foo" => "foo_value",)      , logs[3]

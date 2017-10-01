@@ -3,19 +3,17 @@ require "action_controller/log_subscriber"
 require "awesome_print"
 require "flog/payload_value_shuntable"
 
-class ActionController::LogSubscriber
+module Flog::ParamsFormattable
   include Flog::PayloadValueShuntable
-
-  def start_processing_with_flog(event)
-    return start_processing_without_flog(event) unless formattable?(event)
+  def start_processing(event)
+    return super(event) unless formattable?(event)
 
     replaced = replace_params(event.payload[:params])
 
     shunt_payload_value(event.payload, :params, replaced) do
-      start_processing_without_flog(event)
+      super(event)
     end
   end
-  alias_method_chain :start_processing, :flog
 
   private
   def replace_params(params)
@@ -54,7 +52,11 @@ class ActionController::LogSubscriber
 
   def key_count_over?(event)
     threshold = Flog.config.params_key_count_threshold.to_i
-    params = event.payload[:params].except(*INTERNAL_PARAMS)
+    params = event.payload[:params].except(*ActionController::LogSubscriber::INTERNAL_PARAMS)
     params.keys.size > threshold
   end
+end
+
+class ActionController::LogSubscriber
+  prepend Flog::ParamsFormattable
 end

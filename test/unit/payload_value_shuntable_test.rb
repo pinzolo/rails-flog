@@ -36,7 +36,7 @@ class PayloadValueShuntableTest < ActiveSupport::TestCase
       @tester.shunt_payload_value(@payload, :foo, "new_value") do
         raise "error"
       end
-    rescue => ex
+    rescue
       error_raised = true
     end
     assert error_raised

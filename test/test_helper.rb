@@ -10,32 +10,46 @@ end
 require "flog"
 require "minitest/autorun"
 
-class TestLogger
-  attr_accessor :debugs, :infos, :errors
+unless defined?(TestLogger)
+  class TestLogger
+    attr_accessor :debugs, :infos, :errors
 
-  def initialize
-    @debugs = []
-    @infos = []
-    @errors = []
+    def initialize
+      @debugs = []
+      @infos = []
+      @errors = []
+    end
+
+    def debug?
+      true
+    end
+
+    def info?
+      true
+    end
+
+    def debug(message)
+      @debugs += message.split("\n") if message
+    end
+
+    def info(message)
+      @infos += message.split("\n") if message
+    end
+
+    def error(message)
+      @errors += message.split("\n") if message
+    end
+  end
+end
+
+unless defined?(COLOR_SEQ_REGEX)
+  COLOR_SEQ_REGEX = /\e\[(\d+;)*\d+m/
+
+  def remove_color_seq(log)
+    log.gsub(COLOR_SEQ_REGEX, "")
   end
 
-  def debug?
-    true
-  end
-
-  def info?
-    true
-  end
-
-  def debug(message)
-    @debugs += message.split("\n") if message
-  end
-
-  def info(message)
-    @infos += message.split("\n") if message
-  end
-
-  def error(message)
-    @errors += message.split("\n") if message
+  def match_color_seq(log)
+    COLOR_SEQ_REGEX.match(log)
   end
 end

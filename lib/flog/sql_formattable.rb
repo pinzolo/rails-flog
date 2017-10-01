@@ -2,19 +2,18 @@
 require "active_record/log_subscriber"
 require "flog/payload_value_shuntable"
 
-class ActiveRecord::LogSubscriber
+module Flog::SqlFormattable
   include Flog::PayloadValueShuntable
 
-  def sql_with_flog(event)
-    return sql_without_flog(event) unless formattable?(event)
+  def sql(event)
+    return super(event) unless formattable?(event)
 
     formatted = format_sql(event.payload[:sql])
 
     shunt_payload_value(event.payload, :sql, "\n\t#{formatted}") do
-      sql_without_flog(event)
+      super(event)
     end
   end
-  alias_method_chain :sql, :flog
 
   private
   def format_sql(sql)
@@ -45,4 +44,8 @@ class ActiveRecord::LogSubscriber
   def duration_over?(event)
     event.duration >= Flog.config.query_duration_threshold.to_f
   end
+end
+
+class ActiveRecord::LogSubscriber
+  prepend Flog::SqlFormattable
 end
