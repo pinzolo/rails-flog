@@ -1,4 +1,3 @@
-# coding: utf-8
 module Flog
   class Configuration
     attr_writer :ignore_cached_query, :force_on_nested_params

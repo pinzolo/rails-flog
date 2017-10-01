@@ -1,4 +1,3 @@
-# coding: utf-8
 require "active_record/log_subscriber"
 require "flog/payload_value_shuntable"
 

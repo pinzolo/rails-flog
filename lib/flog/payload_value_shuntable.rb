@@ -1,4 +1,3 @@
-# coding: utf-8
 module Flog
   module PayloadValueShuntable
     def shunt_payload_value(payload, key, temp_value, &block)

@@ -1,4 +1,3 @@
-# coding: utf-8
 require "coveralls"
 require "simplecov"
 SimpleCov.formatter = Coveralls::SimpleCov::Formatter

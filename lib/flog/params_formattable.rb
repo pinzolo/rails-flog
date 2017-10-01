@@ -1,4 +1,3 @@
-# coding: utf-8
 require "action_controller/log_subscriber"
 require "awesome_print"
 require "flog/payload_value_shuntable"

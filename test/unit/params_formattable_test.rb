@@ -1,4 +1,3 @@
-# coding: utf-8
 require "action_controller"
 require "test_helper"
 
