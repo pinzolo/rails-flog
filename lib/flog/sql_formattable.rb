@@ -38,7 +38,7 @@ module Flog::SqlFormattable
   end
 
   def ignore_by_cached_query?(event)
-    event.payload[:name] == "CACHE" && Flog.config.ignore_cached_query?
+    (event.payload[:name] == "CACHE" || event.payload[:cached]) && Flog.config.ignore_cached_query?
   end
 
   def duration_over?(event)
