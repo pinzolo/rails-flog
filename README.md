@@ -126,8 +126,8 @@ Priority of this feature is higher than configurations.
 
 ## Supported versions
 
-- Ruby: 2.0.x, 2.1.x, 2.2.x
-- Rails: 3.2.x, 4.0.x, 4.1.x, 4.2.x, 5.0.x, 5.1.x
+- Ruby: 2.0.x, 2.1.x, 2.2.x, 2.3.x, 2.4.x, 2.5.x
+- Rails: 3.2.x, 4.0.x, 4.1.x, 4.2.x, 5.0.x, 5.1.x, 5.2.x
 
 ## Contributing
 
