@@ -111,6 +111,21 @@ class SqlFormattableTest < ActiveSupport::TestCase
     end
   end
 
+  def test_2space_indent
+    Flog.configure do |config|
+      config.sql_indent = "  "
+    end
+    Book.where(category: "comics").to_a
+    assert_logger do |logger|
+      assert_equal %{  SELECT}       , logger.debugs[1]
+      assert_equal %{    "books" . *}, logger.debugs[2]
+      assert_equal %{  FROM}         , logger.debugs[3]
+      assert_equal %{    "books"}    , logger.debugs[4]
+      assert_equal %{  WHERE}        , logger.debugs[5]
+      assert logger.debugs[6].start_with?(%{    "books" . "category" = })
+    end
+  end
+
   private
   def assert_logger(&block)
     if ActiveRecord::Base.logger.errors.present?
