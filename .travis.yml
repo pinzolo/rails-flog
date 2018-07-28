@@ -1,5 +1,8 @@
 language: ruby
 sudo: false
+branches:
+  only:
+    - master
 rvm:
   - 2.0
   - 2.1
