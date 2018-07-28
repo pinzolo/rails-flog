@@ -32,13 +32,12 @@ class SqlFormattableTest < ActiveSupport::TestCase
   def test_sql_is_formatted
     Book.where(category: "comics").to_a
     assert_logger do |logger|
-      logs = logger.debugs.map { |log| log.gsub("\t", "    ") }
-      assert_equal %{    SELECT}                             , logs[1]
-      assert_equal %{        "books" . *}                    , logs[2]
-      assert_equal %{    FROM}                               , logs[3]
-      assert_equal %{        "books"}                        , logs[4]
-      assert_equal %{    WHERE}                              , logs[5]
-      assert logs[6].start_with?(%{        "books" . "category" = })
+      assert_equal %{\tSELECT}       , logger.debugs[1]
+      assert_equal %{\t\t"books" . *}, logger.debugs[2]
+      assert_equal %{\tFROM}         , logger.debugs[3]
+      assert_equal %{\t\t"books"}    , logger.debugs[4]
+      assert_equal %{\tWHERE}        , logger.debugs[5]
+      assert logger.debugs[6].start_with?(%{\t\t"books" . "category" = })
     end
   end
 
@@ -81,8 +80,7 @@ class SqlFormattableTest < ActiveSupport::TestCase
       Book.where(category: "comics").to_a
     end
     assert_logger do |logger|
-      logs = logger.debugs.map { |log| log.gsub("\t", "    ") }
-      logs.each do |log|
+      logger.debugs.each do |log|
         assert_one_line_sql log if log.include?("CACHE")
       end
     end
@@ -97,8 +95,7 @@ class SqlFormattableTest < ActiveSupport::TestCase
       Book.where(category: "comics").to_a
     end
     assert_logger do |logger|
-      logs = logger.debugs.map { |log| log.gsub("\t", "    ") }
-      logs.each do |log|
+      logger.debugs.each do |log|
         assert_equal log.include?("SELECT"), false if log.include?("CACHE")
       end
     end
