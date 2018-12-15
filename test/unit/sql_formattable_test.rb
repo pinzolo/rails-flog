@@ -126,6 +126,57 @@ class SqlFormattableTest < ActiveSupport::TestCase
     end
   end
 
+  def test_default_in_values_num
+    Book.where(id: (1..10).to_a).to_a
+    assert_logger do |logger|
+      assert_equal %{\tSELECT}               , logger.debugs[1]
+      assert_equal %{\t\t"books" . *}        , logger.debugs[2]
+      assert_equal %{\tFROM}                 , logger.debugs[3]
+      assert_equal %{\t\t"books"}            , logger.debugs[4]
+      assert_equal %{\tWHERE}                , logger.debugs[5]
+      assert_equal %{\t\t"books" . "id" IN (}, logger.debugs[6]
+      (8..16).each do |l|
+        assert_equal 1, logger.debugs[l].count(",")
+      end
+      assert logger.debugs[17].start_with?(%{\t\t)})
+    end
+  end
+
+  def test_in_values_num_set
+    Flog.configure do |config|
+      config.sql_in_values_num = 5
+    end
+    Book.where(id: (1..10).to_a).to_a
+    assert_logger do |logger|
+      assert_equal %{\tSELECT}               , logger.debugs[1]
+      assert_equal %{\t\t"books" . *}        , logger.debugs[2]
+      assert_equal %{\tFROM}                 , logger.debugs[3]
+      assert_equal %{\t\t"books"}            , logger.debugs[4]
+      assert_equal %{\tWHERE}                , logger.debugs[5]
+      assert_equal %{\t\t"books" . "id" IN (}, logger.debugs[6]
+      assert_equal 4, logger.debugs[7].count(",")
+      assert_equal 5, logger.debugs[8].count(",")
+      assert logger.debugs[9].start_with?(%{\t\t)})
+    end
+  end
+
+  def test_oneline_in_values
+    Flog.configure do |config|
+      config.sql_in_values_num = Flog::ONELINE_IN_VALUES_NUM
+    end
+    Book.where(id: (1..10).to_a).to_a
+    assert_logger do |logger|
+      assert_equal %{\tSELECT}               , logger.debugs[1]
+      assert_equal %{\t\t"books" . *}        , logger.debugs[2]
+      assert_equal %{\tFROM}                 , logger.debugs[3]
+      assert_equal %{\t\t"books"}            , logger.debugs[4]
+      assert_equal %{\tWHERE}                , logger.debugs[5]
+      assert_equal %{\t\t"books" . "id" IN (}, logger.debugs[6]
+      assert_equal 9, logger.debugs[7].count(",")
+      assert logger.debugs[8].start_with?(%{\t\t)})
+    end
+  end
+
   private
   def assert_logger(&block)
     if ActiveRecord::Base.logger.errors.present?
