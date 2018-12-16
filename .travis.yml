@@ -4,29 +4,11 @@ branches:
   only:
     - master
 rvm:
-  - 2.0
-  - 2.1
-  - 2.2
   - 2.3
   - 2.4
   - 2.5
 gemfile:
-  - gemfiles/rails_4_1_x.gemfile
   - gemfiles/rails_4_2_x.gemfile
   - gemfiles/rails_5_0_x.gemfile
   - gemfiles/rails_5_1_x.gemfile
   - gemfiles/rails_5_2_x.gemfile
-matrix:
-  exclude:
-    - gemfile: gemfiles/rails_5_0_x.gemfile
-      rvm: 2.0
-    - gemfile: gemfiles/rails_5_0_x.gemfile
-      rvm: 2.1
-    - gemfile: gemfiles/rails_5_1_x.gemfile
-      rvm: 2.0
-    - gemfile: gemfiles/rails_5_1_x.gemfile
-      rvm: 2.1
-    - gemfile: gemfiles/rails_5_2_x.gemfile
-      rvm: 2.0
-    - gemfile: gemfiles/rails_5_2_x.gemfile
-      rvm: 2.1
