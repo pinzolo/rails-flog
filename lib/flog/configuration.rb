@@ -1,7 +1,11 @@
+require "anbt-sql-formatter/rule"
+
 module Flog
+  ONELINE_IN_VALUES_NUM = ::AnbtSql::Rule::ONELINE_IN_VALUES_NUM
+
   class Configuration
     attr_writer :ignore_cached_query, :force_on_nested_params
-    attr_accessor :query_duration_threshold, :params_key_count_threshold, :sql_indent
+    attr_accessor :query_duration_threshold, :params_key_count_threshold, :sql_indent, :sql_in_values_num
 
     def initialize
       @ignore_cached_query = true
@@ -9,6 +13,7 @@ module Flog
       @params_key_count_threshold = 1
       @force_on_nested_params = true
       @sql_indent = "\t"
+      @sql_in_values_num = 1
     end
 
     def ignore_cached_query?
