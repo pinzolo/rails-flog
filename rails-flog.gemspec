@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "minitest"
   spec.add_development_dependency "coveralls"
 
-  spec.add_dependency "rails", ">=4.1.0"
+  spec.add_dependency "rails", ">=4.2.0"
   spec.add_dependency "anbt-sql-formatter", ">=0.0.7"
   spec.add_dependency "awesome_print"
 end
