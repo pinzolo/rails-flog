@@ -148,4 +148,4 @@ Priority of this feature is higher than configurations.
 - v1.3.2  (2014-04-28 JST):  Confirm with Rails 4.1
 - v1.3.3  (2015-11-16 JST):  Confirm with Rails 4.2
 - v1.4.0  (2017-10-01 JST):  Compatible for Rails 5.0 and Rails 5.1, and dropped Ruby 1.9.3 support
-- v1.5.0  (2018-12-19 JST):  Add `sql_indenti` and `sql_in_values_num` options, and dropped eol rails versions.
+- v1.5.0  (2018-12-19 JST):  Add `sql_indent` and `sql_in_values_num` options, and dropped eol rails versions.
