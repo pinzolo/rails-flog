@@ -10,19 +10,19 @@ module Flog
     class << self
       def enabled?
         !switch_file_exists?(SWITCH_FILE_NAME)
-      rescue
+      rescue StandardError
         true
       end
 
       def sql_formattable?
         enabled? && !switch_file_exists?(SQL_SWITCH_FILE_NAME)
-      rescue
+      rescue StandardError
         true
       end
 
       def params_formattable?
         enabled? && !switch_file_exists?(PARAMS_SWITCH_FILE_NAME)
-      rescue
+      rescue StandardError
         true
       end
 
