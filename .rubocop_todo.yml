@@ -103,9 +103,9 @@ Metrics/MethodLength:
 #     - 'lib/flog/sql_formattable.rb'
 
 # Offense count: 2
-Style/ClassVars:
-  Exclude:
-    - 'lib/flog/configuration.rb'
+# Style/ClassVars:
+#   Exclude:
+#     - 'lib/flog/configuration.rb'
 
 # Offense count: 8
 Style/Documentation:

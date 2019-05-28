@@ -27,13 +27,15 @@ module Flog
     end
   end
 
-  def self.config
-    @@config ||= Flog::Configuration.new
-  end
+  class << self
+    def config
+      @config ||= Flog::Configuration.new
+    end
 
-  def self.configure
-    cfg = Flog::Configuration.new
-    yield(cfg) if block_given?
-    @@config = cfg
+    def configure
+      cfg = Flog::Configuration.new
+      yield(cfg) if block_given?
+      @config = cfg
+    end
   end
 end
