@@ -172,13 +172,13 @@ Style/GuardClause:
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, UseHashRocketsWithSymbolValues, PreferHashRocketsForNonAlnumEndingSymbols.
 # SupportedStyles: ruby19, hash_rockets, no_mixed_keys, ruby19_no_mixed_keys
-Style/HashSyntax:
-  Exclude:
-    - 'Rakefile'
-    - 'gemfiles/rails_4_2_x.gemfile'
-    - 'gemfiles/rails_5_0_x.gemfile'
-    - 'gemfiles/rails_5_1_x.gemfile'
-    - 'gemfiles/rails_5_2_x.gemfile'
+# Style/HashSyntax:
+#   Exclude:
+#     - 'Rakefile'
+#     - 'gemfiles/rails_4_2_x.gemfile'
+#     - 'gemfiles/rails_5_0_x.gemfile'
+#     - 'gemfiles/rails_5_1_x.gemfile'
+#     - 'gemfiles/rails_5_2_x.gemfile'
 
 # Offense count: 4
 # Cop supports --auto-correct.
