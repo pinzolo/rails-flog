@@ -2,3 +2,8 @@
 Layout/SpaceBeforeComma:
   Exclude:
     - 'test/unit/sql_formattable_test.rb'
+
+# This is test code not production.
+Security/Eval:
+  Exclude:
+    - 'test/unit/params_formattable_test.rb'

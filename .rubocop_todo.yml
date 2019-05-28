@@ -62,9 +62,9 @@ inherit_from: .rubocop.yml
 
 # Offense count: 1
 # Configuration parameters: ContextCreatingMethods, MethodCreatingMethods.
-Lint/UselessAccessModifier:
-  Exclude:
-    - 'lib/flog/status.rb'
+# Lint/UselessAccessModifier:
+#   Exclude:
+#     - 'lib/flog/status.rb'
 
 # Offense count: 8
 Metrics/AbcSize:
@@ -81,9 +81,9 @@ Metrics/MethodLength:
   Max: 15
 
 # Offense count: 1
-Security/Eval:
-  Exclude:
-    - 'test/unit/params_formattable_test.rb'
+# Security/Eval:
+#   Exclude:
+#     - 'test/unit/params_formattable_test.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
