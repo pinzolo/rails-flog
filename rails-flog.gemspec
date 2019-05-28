@@ -19,13 +19,13 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_development_dependency 'bundler', '~> 2.0'
-  spec.add_development_dependency 'rake'
-  spec.add_development_dependency 'sqlite3'
-  spec.add_development_dependency 'minitest'
   spec.add_development_dependency 'coveralls'
+  spec.add_development_dependency 'minitest'
+  spec.add_development_dependency 'rake'
   spec.add_development_dependency 'rubocop'
+  spec.add_development_dependency 'sqlite3'
 
-  spec.add_dependency 'rails', '>=4.2.0'
   spec.add_dependency 'anbt-sql-formatter', '>=0.0.7'
   spec.add_dependency 'awesome_print'
+  spec.add_dependency 'rails', '>=4.2.0'
 end
