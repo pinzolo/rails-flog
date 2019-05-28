@@ -27,8 +27,8 @@ class ParamsFormattableTest < ActionController::TestCase
     ActiveSupport::LogSubscriber.colorize_logging = false
     @routes = ActionDispatch::Routing::RouteSet.new
     @routes.draw do
-        get 'test/show', to: 'test#show'
-      end
+      get 'test/show', to: 'test#show'
+    end
     @controller = TestController.new(@routes)
     super
     ActionController::Base.logger = TestLogger.new
