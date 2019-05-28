@@ -24,9 +24,9 @@
 
 # Offense count: 1
 # Cop supports --auto-correct.
-Layout/EmptyLineAfterMagicComment:
-  Exclude:
-    - 'rails-flog.gemspec'
+# Layout/EmptyLineAfterMagicComment:
+#   Exclude:
+#     - 'rails-flog.gemspec'
 
 # Offense count: 5
 # Cop supports --auto-correct.
