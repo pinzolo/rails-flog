@@ -27,7 +27,7 @@ module Flog
       rule.keyword = AnbtSql::Rule::KEYWORD_UPPER_CASE
       rule.indent_string = Flog.config.sql_indent
       rule.in_values_num = Flog.config.sql_in_values_num
-      %w(count sum).each do |function_name|
+      %w[count sum].each do |function_name|
         rule.function_names << function_name
       end
       AnbtSql::Formatter.new(rule).format(sql.squeeze(' '))
