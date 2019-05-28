@@ -240,30 +240,6 @@ Style/SpecialGlobalVars:
   Exclude:
     - 'rails-flog.gemspec'
 
-# Offense count: 158
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, ConsistentQuotesInMultiline.
-# SupportedStyles: single_quotes, double_quotes
-Style/StringLiterals:
-  Exclude:
-    - 'Rakefile'
-    - 'gemfiles/rails_4_2_x.gemfile'
-    - 'gemfiles/rails_5_0_x.gemfile'
-    - 'gemfiles/rails_5_1_x.gemfile'
-    - 'gemfiles/rails_5_2_x.gemfile'
-    - 'lib/flog.rb'
-    - 'lib/flog/configuration.rb'
-    - 'lib/flog/params_formattable.rb'
-    - 'lib/flog/sql_formattable.rb'
-    - 'lib/flog/status.rb'
-    - 'lib/flog/version.rb'
-    - 'rails-flog.gemspec'
-    - 'test/test_helper.rb'
-    - 'test/unit/params_formattable_test.rb'
-    - 'test/unit/payload_value_shuntable_test.rb'
-    - 'test/unit/sql_formattable_test.rb'
-    - 'test/unit/status_test.rb'
-
 # Offense count: 2
 # Cop supports --auto-correct.
 Style/UnneededPercentQ:

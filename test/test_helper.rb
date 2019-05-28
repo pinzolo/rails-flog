@@ -1,13 +1,13 @@
-require "coveralls"
-require "simplecov"
+require 'coveralls'
+require 'simplecov'
 SimpleCov.formatter = Coveralls::SimpleCov::Formatter
 SimpleCov.start do
   add_filter '/test/'
   add_filter '/bundle/'
 end
 
-require "flog"
-require "minitest/autorun"
+require 'flog'
+require 'minitest/autorun'
 
 unless defined?(TestLogger)
   class TestLogger
@@ -45,7 +45,7 @@ unless defined?(COLOR_SEQ_REGEX)
   COLOR_SEQ_REGEX = /\e\[(\d+;)*\d+m/
 
   def remove_color_seq(log)
-    log.gsub(COLOR_SEQ_REGEX, "")
+    log.gsub(COLOR_SEQ_REGEX, '')
   end
 
   def match_color_seq(log)

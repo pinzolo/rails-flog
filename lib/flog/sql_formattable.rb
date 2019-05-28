@@ -1,5 +1,5 @@
-require "active_record/log_subscriber"
-require "flog/payload_value_shuntable"
+require 'active_record/log_subscriber'
+require 'flog/payload_value_shuntable'
 
 module Flog::SqlFormattable
   include Flog::PayloadValueShuntable
@@ -19,7 +19,7 @@ module Flog::SqlFormattable
   def format_sql(sql)
     return sql if sql.blank?
 
-    require "anbt-sql-formatter/formatter"
+    require 'anbt-sql-formatter/formatter'
     rule = AnbtSql::Rule.new
     rule.keyword = AnbtSql::Rule::KEYWORD_UPPER_CASE
     rule.indent_string = Flog.config.sql_indent
@@ -27,7 +27,7 @@ module Flog::SqlFormattable
     %w(count sum).each do |function_name|
       rule.function_names << function_name
     end
-    AnbtSql::Formatter.new(rule).format(sql.squeeze(" "))
+    AnbtSql::Formatter.new(rule).format(sql.squeeze(' '))
   end
 
   def formattable?(event)
@@ -39,7 +39,7 @@ module Flog::SqlFormattable
   end
 
   def ignore_by_cached_query?(event)
-    (event.payload[:name] == "CACHE" || event.payload[:cached]) && Flog.config.ignore_cached_query?
+    (event.payload[:name] == 'CACHE' || event.payload[:cached]) && Flog.config.ignore_cached_query?
   end
 
   def duration_over?(event)

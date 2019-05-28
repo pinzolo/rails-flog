@@ -1,4 +1,4 @@
-require "anbt-sql-formatter/rule"
+require 'anbt-sql-formatter/rule'
 
 module Flog
   ONELINE_IN_VALUES_NUM = ::AnbtSql::Rule::ONELINE_IN_VALUES_NUM
