@@ -97,10 +97,10 @@ Metrics/MethodLength:
 # Cop supports --auto-correct.
 # Configuration parameters: AutoCorrect, EnforcedStyle.
 # SupportedStyles: nested, compact
-Style/ClassAndModuleChildren:
-  Exclude:
-    - 'lib/flog/params_formattable.rb'
-    - 'lib/flog/sql_formattable.rb'
+# Style/ClassAndModuleChildren:
+#   Exclude:
+#     - 'lib/flog/params_formattable.rb'
+#     - 'lib/flog/sql_formattable.rb'
 
 # Offense count: 2
 Style/ClassVars:
