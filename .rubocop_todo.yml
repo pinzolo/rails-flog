@@ -51,9 +51,9 @@ inherit_from: .rubocop.yml
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: final_newline, final_blank_line
-Layout/TrailingBlankLines:
-  Exclude:
-    - 'gemfiles/rails_4_2_x.gemfile'
+# Layout/TrailingBlankLines:
+#   Exclude:
+#     - 'gemfiles/rails_4_2_x.gemfile'
 
 # Offense count: 1
 Lint/IneffectiveAccessModifier:
