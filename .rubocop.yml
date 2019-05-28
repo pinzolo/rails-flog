@@ -11,3 +11,7 @@ Security/Eval:
 # method having '?' suffix should return boolean, double negation is very useful.
 Style/DoubleNegation:
   Enabled: false
+
+# 80 is too restrict.
+Metrics/LineLength:
+  Max: 120

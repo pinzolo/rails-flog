@@ -115,6 +115,7 @@ class ParamsFormattableTest < ActionController::TestCase
     end
   end
 
+  # rubocop:disable Style/LineLength
   def test_parameters_log_is_formatted_when_key_of_parameters_count_is_under_configured_threshold_but_force_on_nested_params_configuration_is_true
     Flog.configure do |config|
       config.params_key_count_threshold = 3
@@ -129,6 +130,7 @@ class ParamsFormattableTest < ActionController::TestCase
       assert_equal hash['bar']['attr'], 'attr_value'
     end
   end
+  # rubocop:enable Style/LineLength
 
   private
 
