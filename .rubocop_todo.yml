@@ -192,11 +192,11 @@ Style/GuardClause:
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: literals, strict
-Style/MutableConstant:
-  Exclude:
-    - 'lib/flog/status.rb'
-    - 'lib/flog/version.rb'
-    - 'test/test_helper.rb'
+# Style/MutableConstant:
+#   Exclude:
+#     - 'lib/flog/status.rb'
+#     - 'lib/flog/version.rb'
+#     - 'test/test_helper.rb'
 
 # Offense count: 30
 # Cop supports --auto-correct.

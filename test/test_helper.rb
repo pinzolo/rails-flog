@@ -44,7 +44,7 @@ unless defined?(TestLogger)
 end
 
 unless defined?(COLOR_SEQ_REGEX)
-  COLOR_SEQ_REGEX = /\e\[(\d+;)*\d+m/
+  COLOR_SEQ_REGEX = /\e\[(\d+;)*\d+m/.freeze
 
   def remove_color_seq(log)
     log.gsub(COLOR_SEQ_REGEX, '')
