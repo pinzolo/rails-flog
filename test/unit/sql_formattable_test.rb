@@ -37,7 +37,7 @@ class SqlFormattableTest < ActiveSupport::TestCase
       assert_equal %{\tFROM}         , logger.debugs[3]
       assert_equal %{\t\t"books"}    , logger.debugs[4]
       assert_equal %{\tWHERE}        , logger.debugs[5]
-      assert logger.debugs[6].start_with?(%{\t\t"books" . "category" = })
+      assert logger.debugs[6].start_with?(%{\t\t"books"."category" = })
     end
   end
 
@@ -122,7 +122,7 @@ class SqlFormattableTest < ActiveSupport::TestCase
       assert_equal %{  FROM}         , logger.debugs[3]
       assert_equal %{    "books"}    , logger.debugs[4]
       assert_equal %{  WHERE}        , logger.debugs[5]
-      assert logger.debugs[6].start_with?(%{    "books" . "category" = })
+      assert logger.debugs[6].start_with?(%{    "books"."category" = })
     end
   end
 
@@ -134,7 +134,7 @@ class SqlFormattableTest < ActiveSupport::TestCase
       assert_equal %{\tFROM}                 , logger.debugs[3]
       assert_equal %{\t\t"books"}            , logger.debugs[4]
       assert_equal %{\tWHERE}                , logger.debugs[5]
-      assert_equal %{\t\t"books" . "id" IN (}, logger.debugs[6]
+      assert_equal %{\t\t"books"."id" IN (}, logger.debugs[6]
       (8..16).each do |l|
         assert_equal 1, logger.debugs[l].count(",")
       end
@@ -153,7 +153,7 @@ class SqlFormattableTest < ActiveSupport::TestCase
       assert_equal %{\tFROM}                 , logger.debugs[3]
       assert_equal %{\t\t"books"}            , logger.debugs[4]
       assert_equal %{\tWHERE}                , logger.debugs[5]
-      assert_equal %{\t\t"books" . "id" IN (}, logger.debugs[6]
+      assert_equal %{\t\t"books"."id" IN (}, logger.debugs[6]
       assert_equal 4, logger.debugs[7].count(",")
       assert_equal 5, logger.debugs[8].count(",")
       assert logger.debugs[9].start_with?(%{\t\t)})
@@ -171,7 +171,7 @@ class SqlFormattableTest < ActiveSupport::TestCase
       assert_equal %{\tFROM}                 , logger.debugs[3]
       assert_equal %{\t\t"books"}            , logger.debugs[4]
       assert_equal %{\tWHERE}                , logger.debugs[5]
-      assert_equal %{\t\t"books" . "id" IN (}, logger.debugs[6]
+      assert_equal %{\t\t"books"."id" IN (}, logger.debugs[6]
       assert_equal 9, logger.debugs[7].count(",")
       assert logger.debugs[8].start_with?(%{\t\t)})
     end
