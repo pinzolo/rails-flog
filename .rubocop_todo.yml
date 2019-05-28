@@ -5,6 +5,7 @@
 # one by one as the offenses are removed from the code base.
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
+inherit_from: .rubocop.yml
 
 # Offense count: 3
 # Cop supports --auto-correct.
@@ -42,9 +43,9 @@
 
 # Offense count: 23
 # Cop supports --auto-correct.
-Layout/SpaceBeforeComma:
-  Exclude:
-    - 'test/unit/sql_formattable_test.rb'
+# Layout/SpaceBeforeComma:
+#   Exclude:
+#     - 'test/unit/sql_formattable_test.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
