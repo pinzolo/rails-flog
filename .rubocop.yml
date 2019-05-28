@@ -7,3 +7,7 @@ Layout/SpaceBeforeComma:
 Security/Eval:
   Exclude:
     - 'test/unit/params_formattable_test.rb'
+
+# method having '?' suffix should return boolean, double negation is very useful.
+Style/DoubleNegation:
+  Enabled: false

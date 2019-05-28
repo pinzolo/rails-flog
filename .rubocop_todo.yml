@@ -119,9 +119,9 @@ Style/Documentation:
     - 'lib/flog/status.rb'
 
 # Offense count: 2
-Style/DoubleNegation:
-  Exclude:
-    - 'lib/flog/configuration.rb'
+# Style/DoubleNegation:
+#   Exclude:
+#     - 'lib/flog/configuration.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
