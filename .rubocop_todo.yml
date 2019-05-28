@@ -220,9 +220,9 @@ Style/GuardClause:
 # Cop supports --auto-correct.
 # Configuration parameters: ConvertCodeThatCanStartToReturnNil, Whitelist.
 # Whitelist: present?, blank?, presence, try, try!
-Style/SafeNavigation:
-  Exclude:
-    - 'lib/flog/status.rb'
+# Style/SafeNavigation:
+#   Exclude:
+#     - 'lib/flog/status.rb'
 
 # Offense count: 2
 # Cop supports --auto-correct.
