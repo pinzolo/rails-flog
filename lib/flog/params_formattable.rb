@@ -15,6 +15,7 @@ module Flog::ParamsFormattable
   end
 
   private
+
   def replace_params(params)
     return params if params.empty? || !params.respond_to?(:ai)
 

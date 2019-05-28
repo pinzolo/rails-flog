@@ -37,6 +37,7 @@ module Flog
     end
 
     private
+
     def self.switch_file_exists?(file_name)
       switch_file_dir_path.join(file_name).exist?
     end

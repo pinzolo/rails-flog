@@ -110,6 +110,7 @@ class StatusTest < ActiveSupport::TestCase
   end
 
   private
+
   def create_switch_file
     create_file(@test_root.join('tmp', Flog::Status::SWITCH_FILE_NAME))
   end

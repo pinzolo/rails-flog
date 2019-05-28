@@ -178,6 +178,7 @@ class SqlFormattableTest < ActiveSupport::TestCase
   end
 
   private
+
   def assert_logger(&block)
     if ActiveRecord::Base.logger.errors.present?
       fail ActiveRecord::Base.logger.errors.first

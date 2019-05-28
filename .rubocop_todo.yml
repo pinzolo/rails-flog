@@ -32,13 +32,13 @@
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: around, only_before
-Layout/EmptyLinesAroundAccessModifier:
-  Exclude:
-    - 'lib/flog/params_formattable.rb'
-    - 'lib/flog/status.rb'
-    - 'test/unit/params_formattable_test.rb'
-    - 'test/unit/sql_formattable_test.rb'
-    - 'test/unit/status_test.rb'
+# Layout/EmptyLinesAroundAccessModifier:
+#   Exclude:
+#     - 'lib/flog/params_formattable.rb'
+#     - 'lib/flog/status.rb'
+#     - 'test/unit/params_formattable_test.rb'
+#     - 'test/unit/sql_formattable_test.rb'
+#     - 'test/unit/status_test.rb'
 
 # Offense count: 23
 # Cop supports --auto-correct.
