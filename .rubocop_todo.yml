@@ -125,15 +125,15 @@ Style/DoubleNegation:
 
 # Offense count: 1
 # Cop supports --auto-correct.
-Style/Encoding:
-  Exclude:
-    - 'rails-flog.gemspec'
+# Style/Encoding:
+#   Exclude:
+#     - 'rails-flog.gemspec'
 
 # Offense count: 1
 # Cop supports --auto-correct.
-Style/ExpandPathArguments:
-  Exclude:
-    - 'rails-flog.gemspec'
+# Style/ExpandPathArguments:
+#   Exclude:
+#     - 'rails-flog.gemspec'
 
 # Offense count: 19
 # Cop supports --auto-correct.
