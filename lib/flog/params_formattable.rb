@@ -21,7 +21,7 @@ module Flog::ParamsFormattable
 
     replaced = params.dup
     class << replaced
-      alias :original_except :except
+      alias_method :original_except, :except
 
       def except(*keys)
         excepted = original_except(*keys)

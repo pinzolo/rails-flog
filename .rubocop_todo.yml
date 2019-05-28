@@ -89,9 +89,9 @@ Metrics/MethodLength:
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: prefer_alias, prefer_alias_method
-Style/Alias:
-  Exclude:
-    - 'lib/flog/params_formattable.rb'
+# Style/Alias:
+#   Exclude:
+#     - 'lib/flog/params_formattable.rb'
 
 # Offense count: 4
 # Cop supports --auto-correct.
