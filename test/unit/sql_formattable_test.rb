@@ -47,14 +47,14 @@ class SqlFormattableTest < ActiveSupport::TestCase
     ActiveSupport::LogSubscriber.colorize_logging = true
     Book.where(category: 'comics').to_a
     assert_logger do |logger|
-      assert match_color_seq(logger.debugs.join())
+      assert match_color_seq(logger.debugs.join)
     end
   end
 
   def test_not_colorized_on_colorize_loggin_is_false
     Book.where(category: 'comics').to_a
     assert_logger do |logger|
-      assert_nil match_color_seq(logger.debugs.join())
+      assert_nil match_color_seq(logger.debugs.join)
     end
   end
 

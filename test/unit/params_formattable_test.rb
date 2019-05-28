@@ -56,7 +56,7 @@ class ParamsFormattableTest < ActionController::TestCase
     ActiveSupport::LogSubscriber.colorize_logging = true
     get_show foo: 'foo_value', bar: 'bar_value'
     assert_logger do |logger|
-      assert match_color_seq(logger.infos.join())
+      assert match_color_seq(logger.infos.join)
     end
   end
 
@@ -64,7 +64,7 @@ class ParamsFormattableTest < ActionController::TestCase
     Flog::Status.stub(:enabled?, true) do
       get_show foo: 'foo_value', bar: 'bar_value'
       assert_logger do |logger|
-        assert_nil match_color_seq(logger.infos.join())
+        assert_nil match_color_seq(logger.infos.join)
       end
     end
   end

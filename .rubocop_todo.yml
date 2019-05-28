@@ -183,10 +183,10 @@ Style/GuardClause:
 # Offense count: 4
 # Cop supports --auto-correct.
 # Configuration parameters: IgnoredMethods.
-Style/MethodCallWithoutArgsParentheses:
-  Exclude:
-    - 'test/unit/params_formattable_test.rb'
-    - 'test/unit/sql_formattable_test.rb'
+# Style/MethodCallWithoutArgsParentheses:
+#   Exclude:
+#     - 'test/unit/params_formattable_test.rb'
+#     - 'test/unit/sql_formattable_test.rb'
 
 # Offense count: 5
 # Cop supports --auto-correct.
