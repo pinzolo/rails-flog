@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'anbt-sql-formatter/rule'
 
 module Flog

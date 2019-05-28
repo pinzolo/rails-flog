@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'coveralls'
 require 'simplecov'
 SimpleCov.formatter = Coveralls::SimpleCov::Formatter

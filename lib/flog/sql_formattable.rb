@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'active_record/log_subscriber'
 require 'flog/payload_value_shuntable'
 
