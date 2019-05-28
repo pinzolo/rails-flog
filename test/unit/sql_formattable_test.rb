@@ -14,7 +14,7 @@ end
 
 class Book < ActiveRecord::Base; end
 
-class SqlFormattableTest < ActiveSupport::TestCase
+module SqlFormattableTestHelper
   def setup
     # default configuration
     Flog.configure do |config|
@@ -30,6 +30,22 @@ class SqlFormattableTest < ActiveSupport::TestCase
   def teardown
     ActiveRecord::Base.logger = @old_logger
   end
+
+  def assert_logger(&block)
+    raise ActiveRecord::Base.logger.errors.first if ActiveRecord::Base.logger.errors.present?
+
+    block.call(ActiveRecord::Base.logger)
+  end
+
+  def assert_one_line_sql(sql)
+    assert sql.include?('SELECT')
+    assert sql.include?('FROM')
+    assert sql.include?('WHERE')
+  end
+end
+
+class SqlFormattableTest < ActiveSupport::TestCase
+  include SqlFormattableTestHelper
 
   def test_sql_is_formatted
     Book.where(category: 'comics').to_a
@@ -127,6 +143,10 @@ class SqlFormattableTest < ActiveSupport::TestCase
       assert logger.debugs[6].start_with?(%(    "books"."category" = ))
     end
   end
+end
+
+class SqlFormattableInValuesTest < ActiveSupport::TestCase
+  include SqlFormattableTestHelper
 
   def test_default_in_values_num
     Book.where(id: (1..10).to_a).to_a
@@ -177,19 +197,5 @@ class SqlFormattableTest < ActiveSupport::TestCase
       assert_equal 9, logger.debugs[7].count(',')
       assert logger.debugs[8].start_with?(%{\t\t)})
     end
-  end
-
-  private
-
-  def assert_logger(&block)
-    raise ActiveRecord::Base.logger.errors.first if ActiveRecord::Base.logger.errors.present?
-
-    block.call(ActiveRecord::Base.logger)
-  end
-
-  def assert_one_line_sql(sql)
-    assert sql.include?('SELECT')
-    assert sql.include?('FROM')
-    assert sql.include?('WHERE')
   end
 end

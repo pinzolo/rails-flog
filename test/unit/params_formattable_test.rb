@@ -17,7 +17,7 @@ class TestController < ActionController::Base
   end
 end
 
-class ParamsFormattableTest < ActionController::TestCase
+module ParamsFormattableTestHelper
   def setup
     # default configuration
     Flog.configure do |config|
@@ -40,6 +40,28 @@ class ParamsFormattableTest < ActionController::TestCase
     super
     ActionController::Base.logger = @old_logger
   end
+
+  def assert_logger(&block)
+    raise ActionController::Base.logger.errors.first if ActionController::Base.logger.errors.present?
+
+    block.call(ActionController::Base.logger)
+  end
+
+  def get_show(params)
+    if Gem::Version.new(Rails.version) >= Gem::Version.new('5.0.0')
+      get :show, params: params
+    else
+      get :show, params
+    end
+  end
+
+  def hash_from_logs(logs, start, finish)
+    eval(start.upto(finish).reduce('') { |s, n| s + logs[n] })
+  end
+end
+
+class ParamsFormattableTest < ActionController::TestCase
+  include ParamsFormattableTestHelper
 
   def test_parameters_log_is_formatted
     get_show foo: 'foo_value', bar: 'bar_value'
@@ -115,7 +137,7 @@ class ParamsFormattableTest < ActionController::TestCase
     end
   end
 
-  # rubocop:disable Style/LineLength
+  # rubocop:disable Metrics/LineLength
   def test_parameters_log_is_formatted_when_key_of_parameters_count_is_under_configured_threshold_but_force_on_nested_params_configuration_is_true
     Flog.configure do |config|
       config.params_key_count_threshold = 3
@@ -130,25 +152,5 @@ class ParamsFormattableTest < ActionController::TestCase
       assert_equal hash['bar']['attr'], 'attr_value'
     end
   end
-  # rubocop:enable Style/LineLength
-
-  private
-
-  def assert_logger(&block)
-    raise ActionController::Base.logger.errors.first if ActionController::Base.logger.errors.present?
-
-    block.call(ActionController::Base.logger)
-  end
-
-  def get_show(params)
-    if Gem::Version.new(Rails.version) >= Gem::Version.new('5.0.0')
-      get :show, params: params
-    else
-      get :show, params
-    end
-  end
-
-  def hash_from_logs(logs, start, finish)
-    eval(start.upto(finish).reduce('') { |s, n| s + logs[n] })
-  end
+  # rubocop:enable Metrics/LineLength
 end
