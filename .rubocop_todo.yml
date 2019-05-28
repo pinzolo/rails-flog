@@ -243,9 +243,9 @@ Style/GuardClause:
 
 # Offense count: 2
 # Cop supports --auto-correct.
-Style/UnneededPercentQ:
-  Exclude:
-    - 'rails-flog.gemspec'
+# Style/UnneededPercentQ:
+#   Exclude:
+#     - 'rails-flog.gemspec'
 
 # Offense count: 14
 # Cop supports --auto-correct.

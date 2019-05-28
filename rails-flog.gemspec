@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.version       = Flog::VERSION
   spec.authors       = ['pinzolo']
   spec.email         = ['pinzolo@gmail.com']
-  spec.description   = %q(This formats parameters and sql in rails log.)
-  spec.summary       = %q(Rails log formatter for parameters and sql)
+  spec.description   = 'This formats parameters and sql in rails log.'
+  spec.summary       = 'Rails log formatter for parameters and sql'
   spec.homepage      = 'https://github.com/pinzolo/rails-flog'
   spec.license       = 'MIT'
 
