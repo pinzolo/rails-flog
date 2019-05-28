@@ -237,9 +237,9 @@ Style/GuardClause:
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: use_perl_names, use_english_names
-Style/SpecialGlobalVars:
-  Exclude:
-    - 'rails-flog.gemspec'
+# Style/SpecialGlobalVars:
+#   Exclude:
+#     - 'rails-flog.gemspec'
 
 # Offense count: 2
 # Cop supports --auto-correct.
