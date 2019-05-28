@@ -163,10 +163,10 @@ Style/Documentation:
 
 # Offense count: 2
 # Configuration parameters: MinBodyLength.
-Style/GuardClause:
-  Exclude:
-    - 'test/unit/params_formattable_test.rb'
-    - 'test/unit/sql_formattable_test.rb'
+# Style/GuardClause:
+#   Exclude:
+#     - 'test/unit/params_formattable_test.rb'
+#     - 'test/unit/sql_formattable_test.rb'
 
 # Offense count: 5
 # Cop supports --auto-correct.

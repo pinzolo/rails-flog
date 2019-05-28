@@ -182,11 +182,9 @@ class SqlFormattableTest < ActiveSupport::TestCase
   private
 
   def assert_logger(&block)
-    if ActiveRecord::Base.logger.errors.present?
-      raise ActiveRecord::Base.logger.errors.first
-    else
-      block.call(ActiveRecord::Base.logger)
-    end
+    raise ActiveRecord::Base.logger.errors.first if ActiveRecord::Base.logger.errors.present?
+
+    block.call(ActiveRecord::Base.logger)
   end
 
   def assert_one_line_sql(sql)
