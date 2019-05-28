@@ -56,9 +56,9 @@ inherit_from: .rubocop.yml
 #     - 'gemfiles/rails_4_2_x.gemfile'
 
 # Offense count: 1
-Lint/IneffectiveAccessModifier:
-  Exclude:
-    - 'lib/flog/status.rb'
+# Lint/IneffectiveAccessModifier:
+#   Exclude:
+#     - 'lib/flog/status.rb'
 
 # Offense count: 1
 # Configuration parameters: ContextCreatingMethods, MethodCreatingMethods.
