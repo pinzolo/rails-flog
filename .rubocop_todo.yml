@@ -228,10 +228,10 @@ Style/GuardClause:
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: only_raise, only_fail, semantic
-Style/SignalException:
-  Exclude:
-    - 'test/unit/params_formattable_test.rb'
-    - 'test/unit/sql_formattable_test.rb'
+# Style/SignalException:
+#   Exclude:
+#     - 'test/unit/params_formattable_test.rb'
+#     - 'test/unit/sql_formattable_test.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.

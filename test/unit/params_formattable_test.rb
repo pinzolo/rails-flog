@@ -134,7 +134,7 @@ class ParamsFormattableTest < ActionController::TestCase
 
   def assert_logger(&block)
     if ActionController::Base.logger.errors.present?
-      fail ActionController::Base.logger.errors.first
+      raise ActionController::Base.logger.errors.first
     else
       block.call(ActionController::Base.logger)
     end
