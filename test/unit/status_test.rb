@@ -1,9 +1,47 @@
-require "rails"
-require "test_helper"
+# frozen_string_literal: true
+
+require 'rails'
+require 'test_helper'
+
+module StatusTestHelper
+  def create_switch_file
+    create_file(@test_root.join('tmp', Flog::Status::SWITCH_FILE_NAME))
+  end
+
+  def delete_switch_file
+    delete_file(@test_root.join('tmp', Flog::Status::SWITCH_FILE_NAME))
+  end
+
+  def create_sql_switch_file
+    create_file(@test_root.join('tmp', Flog::Status::SQL_SWITCH_FILE_NAME))
+  end
+
+  def delete_sql_switch_file
+    delete_file(@test_root.join('tmp', Flog::Status::SQL_SWITCH_FILE_NAME))
+  end
+
+  def create_params_switch_file
+    create_file(@test_root.join('tmp', Flog::Status::PARAMS_SWITCH_FILE_NAME))
+  end
+
+  def delete_params_switch_file
+    delete_file(@test_root.join('tmp', Flog::Status::PARAMS_SWITCH_FILE_NAME))
+  end
+
+  def create_file(file_path)
+    File.open(file_path, 'w').close
+  end
+
+  def delete_file(file_path)
+    File.delete(file_path) if File.exist?(file_path)
+  end
+end
 
 class StatusTest < ActiveSupport::TestCase
+  include StatusTestHelper
+
   def setup
-    @test_root = Pathname.new(File.expand_path(File.dirname(__FILE__) + "../../"))
+    @test_root = Pathname.new(File.expand_path(File.dirname(__FILE__) + '../../'))
   end
 
   def teardown
@@ -107,38 +145,5 @@ class StatusTest < ActiveSupport::TestCase
       create_params_switch_file
       assert Flog::Status.params_formattable?
     end
-  end
-
-  private
-  def create_switch_file
-    create_file(@test_root.join("tmp", Flog::Status::SWITCH_FILE_NAME))
-  end
-
-  def delete_switch_file
-    delete_file(@test_root.join("tmp", Flog::Status::SWITCH_FILE_NAME))
-  end
-
-  def create_sql_switch_file
-    create_file(@test_root.join("tmp", Flog::Status::SQL_SWITCH_FILE_NAME))
-  end
-
-  def delete_sql_switch_file
-    delete_file(@test_root.join("tmp", Flog::Status::SQL_SWITCH_FILE_NAME))
-  end
-
-  def create_params_switch_file
-    create_file(@test_root.join("tmp", Flog::Status::PARAMS_SWITCH_FILE_NAME))
-  end
-
-  def delete_params_switch_file
-    delete_file(@test_root.join("tmp", Flog::Status::PARAMS_SWITCH_FILE_NAME))
-  end
-
-  def create_file(file_path)
-    File.open(file_path, "w").close
-  end
-
-  def delete_file(file_path)
-    File.delete(file_path) if File.exist?(file_path)
   end
 end

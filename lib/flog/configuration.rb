@@ -1,8 +1,13 @@
-require "anbt-sql-formatter/rule"
+# frozen_string_literal: true
 
+require 'anbt-sql-formatter/rule'
+
+# Flog is root module of this gem
 module Flog
   ONELINE_IN_VALUES_NUM = ::AnbtSql::Rule::ONELINE_IN_VALUES_NUM
 
+  # Configuration of this gem.
+  # Call `configure` to setup.
   class Configuration
     attr_writer :ignore_cached_query, :force_on_nested_params
     attr_accessor :query_duration_threshold, :params_key_count_threshold, :sql_indent, :sql_in_values_num
@@ -25,13 +30,15 @@ module Flog
     end
   end
 
-  def self.config
-    @@config ||= Flog::Configuration.new
-  end
+  class << self
+    def config
+      @config ||= Flog::Configuration.new
+    end
 
-  def self.configure
-    cfg = Flog::Configuration.new
-    yield(cfg) if block_given?
-    @@config = cfg
+    def configure
+      cfg = Flog::Configuration.new
+      yield(cfg) if block_given?
+      @config = cfg
+    end
   end
 end

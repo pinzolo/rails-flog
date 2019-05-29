@@ -1,0 +1,25 @@
+# Current style is easy to confirm SQL.
+Layout/SpaceBeforeComma:
+  Exclude:
+    - 'test/unit/sql_formattable_test.rb'
+
+Metrics/AbcSize:
+  Exclude:
+    - 'test/**/*'
+
+# 80 is too restrict.
+Metrics/LineLength:
+  Max: 120
+
+Metrics/MethodLength:
+  Exclude:
+    - 'test/**/*'
+
+# This is test code not production.
+Security/Eval:
+  Exclude:
+    - 'test/unit/params_formattable_test.rb'
+
+# method having '?' suffix should return boolean, double negation is very useful.
+Style/DoubleNegation:
+  Enabled: false
