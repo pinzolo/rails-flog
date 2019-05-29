@@ -19,3 +19,7 @@ Metrics/LineLength:
 Metrics/MethodLength:
   Exclude:
     - 'test/**/*'
+
+Metrics/AbcSize:
+  Exclude:
+    - 'test/**/*'

@@ -8,8 +8,8 @@
 inherit_from: .rubocop.yml
 
 # Offense count: 8
-Metrics/AbcSize:
-  Max: 36
+# Metrics/AbcSize:
+#   Max: 36
 
 # Offense count: 3
 # Configuration parameters: CountComments.
