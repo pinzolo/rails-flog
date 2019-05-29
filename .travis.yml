@@ -17,3 +17,6 @@ matrix:
   exclude:
     - gemfile: gemfiles/rails_4_2_x.gemfile
       rvm: 2.6
+  before_install:
+    - gem uninstall -v '>= 2' -i $(rvm gemdir)@global -ax bundler || true
+    - gem install bundler -v '< 2'
