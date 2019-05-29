@@ -5,6 +5,20 @@ require 'awesome_print'
 require 'flog/payload_value_shuntable'
 
 module Flog
+  module ParamsInspectOverridable
+    def inspect
+      "\n#{ai(plain: !ActionController::LogSubscriber.colorize_logging)}"
+    end
+  end
+
+  module ParamsExceptOverridable
+    def except(*keys)
+      excepted = super(*keys)
+      excepted.singleton_class.prepend(ParamsInspectOverridable)
+      excepted
+    end
+  end
+
   module ParamsFormattable
     include Flog::PayloadValueShuntable
     def start_processing(event)
@@ -23,19 +37,7 @@ module Flog
       return params if params.empty? || !params.respond_to?(:ai)
 
       replaced = params.dup
-      class << replaced
-        alias_method :original_except, :except
-
-        def except(*keys)
-          excepted = original_except(*keys)
-          class << excepted
-            def inspect
-              "\n#{ai(plain: !ActionController::LogSubscriber.colorize_logging)}"
-            end
-          end
-          excepted
-        end
-      end
+      replaced.singleton_class.prepend(ParamsExceptOverridable)
       replaced
     end
 

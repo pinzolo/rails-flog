@@ -31,6 +31,22 @@ module SqlFormattableTestHelper
     ActiveRecord::Base.logger = @old_logger
   end
 
+  def configure(pairs)
+    Flog.configure do |config|
+      pairs.each do |key, value|
+        meth = "#{key}="
+        config.send(meth, value) if config.respond_to?(meth)
+      end
+    end
+  end
+
+  def prepare_for_query_cache
+    Book.cache do
+      Book.where(category: 'comics').to_a
+      Book.where(category: 'comics').to_a
+    end
+  end
+
   def assert_logger(&block)
     raise ActiveRecord::Base.logger.errors.first if ActiveRecord::Base.logger.errors.present?
 
@@ -93,10 +109,7 @@ class SqlFormattableTest < ActiveSupport::TestCase
   end
 
   def test_sql_is_not_formatted_on_cached_query
-    Book.cache do
-      Book.where(category: 'comics').to_a
-      Book.where(category: 'comics').to_a
-    end
+    prepare_for_query_cache
     assert_logger do |logger|
       logger.debugs.each do |log|
         assert_one_line_sql log if log.include?('CACHE')
@@ -105,13 +118,8 @@ class SqlFormattableTest < ActiveSupport::TestCase
   end
 
   def test_sql_is_formatted_on_cached_query_when_ignore_cached_query_configration_is_false
-    Flog.configure do |config|
-      config.ignore_cached_query = false
-    end
-    Book.cache do
-      Book.where(category: 'comics').to_a
-      Book.where(category: 'comics').to_a
-    end
+    configure(ignore_cached_query: false)
+    prepare_for_query_cache
     assert_logger do |logger|
       logger.debugs.each do |log|
         assert_equal log.include?('SELECT'), false if log.include?('CACHE')
@@ -120,9 +128,7 @@ class SqlFormattableTest < ActiveSupport::TestCase
   end
 
   def test_sql_is_not_formatted_when_duration_is_under_threshold
-    Flog.configure do |config|
-      config.query_duration_threshold = 100.0
-    end
+    configure(query_duration_threshold: 100.0)
     Book.where(category: 'comics').to_a
     assert_logger do |logger|
       assert_one_line_sql logger.debugs.first
@@ -130,9 +136,7 @@ class SqlFormattableTest < ActiveSupport::TestCase
   end
 
   def test_2space_indent
-    Flog.configure do |config|
-      config.sql_indent = '  '
-    end
+    configure(sql_indent: '  ')
     Book.where(category: 'comics').to_a
     assert_logger do |logger|
       assert_equal %(  SELECT)       , logger.debugs[1]
@@ -165,9 +169,7 @@ class SqlFormattableInValuesTest < ActiveSupport::TestCase
   end
 
   def test_in_values_num_set
-    Flog.configure do |config|
-      config.sql_in_values_num = 5
-    end
+    configure(sql_in_values_num: 5)
     Book.where(id: (1..10).to_a).to_a
     assert_logger do |logger|
       assert_equal %(\tSELECT)               , logger.debugs[1]
@@ -183,9 +185,7 @@ class SqlFormattableInValuesTest < ActiveSupport::TestCase
   end
 
   def test_oneline_in_values
-    Flog.configure do |config|
-      config.sql_in_values_num = Flog::ONELINE_IN_VALUES_NUM
-    end
+    configure(sql_in_values_num: Flog::ONELINE_IN_VALUES_NUM)
     Book.where(id: (1..10).to_a).to_a
     assert_logger do |logger|
       assert_equal %(\tSELECT)               , logger.debugs[1]

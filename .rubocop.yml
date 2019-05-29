@@ -15,3 +15,7 @@ Style/DoubleNegation:
 # 80 is too restrict.
 Metrics/LineLength:
   Max: 120
+
+Metrics/MethodLength:
+  Exclude:
+    - 'test/**/*'

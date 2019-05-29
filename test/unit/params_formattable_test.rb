@@ -27,11 +27,7 @@ module ParamsFormattableTestHelper
 
     @old_logger = ActionController::Base.logger
     ActiveSupport::LogSubscriber.colorize_logging = false
-    @routes = ActionDispatch::Routing::RouteSet.new
-    @routes.draw do
-      get 'test/show', to: 'test#show'
-    end
-    @controller = TestController.new(@routes)
+    setup_routes
     super
     ActionController::Base.logger = TestLogger.new
   end
@@ -41,10 +37,30 @@ module ParamsFormattableTestHelper
     ActionController::Base.logger = @old_logger
   end
 
+  def setup_routes
+    @routes = ActionDispatch::Routing::RouteSet.new
+    @routes.draw do
+      get 'test/show', to: 'test#show'
+    end
+    @controller = TestController.new(@routes)
+  end
+
   def assert_logger(&block)
     raise ActionController::Base.logger.errors.first if ActionController::Base.logger.errors.present?
 
     block.call(ActionController::Base.logger)
+  end
+
+  def assert_include(log, *expected_includees)
+    expected_includees.each do |e|
+      assert log.include?(e)
+    end
+  end
+
+  def assert_hash(hash)
+    assert_equal hash['foo'], 'foo_value'
+    assert_equal hash['bar']['prop'], 'prop_value'
+    assert_equal hash['bar']['attr'], 'attr_value'
   end
 
   def get_show(params)
@@ -64,13 +80,12 @@ class ParamsFormattableTest < ActionController::TestCase
   include ParamsFormattableTestHelper
 
   def test_parameters_log_is_formatted
-    get_show foo: 'foo_value', bar: 'bar_value'
+    get_show foo: 'foo_value', bar: { prop: 'prop_value', attr: 'attr_value' }
     assert_logger do |logger|
       logs = logger.infos.map { |log| remove_color_seq(log) }
       assert_equal '  Parameters: ', logs[1]
-      hash = hash_from_logs(logs, 2, 5)
-      assert_equal hash['foo'], 'foo_value'
-      assert_equal hash['bar'], 'bar_value'
+      hash = hash_from_logs(logs, 2, 8)
+      assert_hash hash
     end
   end
 
@@ -95,9 +110,7 @@ class ParamsFormattableTest < ActionController::TestCase
     Flog::Status.stub(:enabled?, false) do
       get_show foo: 'foo_value', bar: 'bar_value'
       assert_logger do |logger|
-        assert logger.infos[1].include?('Parameters: {')
-        assert logger.infos[1].include?(%("foo"=>"foo_value"))
-        assert logger.infos[1].include?(%("bar"=>"bar_value"))
+        assert_include logger.infos[1], 'Parameters: {', %("foo"=>"foo_value"), %("bar"=>"bar_value")
       end
     end
   end
@@ -106,9 +119,7 @@ class ParamsFormattableTest < ActionController::TestCase
     Flog::Status.stub(:params_formattable?, false) do
       get_show foo: 'foo_value', bar: 'bar_value'
       assert_logger do |logger|
-        assert logger.infos[1].include?('Parameters: {')
-        assert logger.infos[1].include?(%("foo"=>"foo_value"))
-        assert logger.infos[1].include?(%("bar"=>"bar_value"))
+        assert_include logger.infos[1], 'Parameters: {', %("foo"=>"foo_value"), %("bar"=>"bar_value")
       end
     end
   end
@@ -119,9 +130,7 @@ class ParamsFormattableTest < ActionController::TestCase
     end
     get_show foo: 'foo_value', bar: 'bar_value'
     assert_logger do |logger|
-      assert logger.infos[1].include?('Parameters: {')
-      assert logger.infos[1].include?(%("foo"=>"foo_value"))
-      assert logger.infos[1].include?(%("bar"=>"bar_value"))
+      assert_include logger.infos[1], 'Parameters: {', %("foo"=>"foo_value"), %("bar"=>"bar_value")
     end
   end
 
@@ -131,9 +140,7 @@ class ParamsFormattableTest < ActionController::TestCase
     end
     get_show foo: 'foo_value', bar: 'bar_value'
     assert_logger do |logger|
-      assert logger.infos[1].include?('Parameters: {')
-      assert logger.infos[1].include?(%("foo"=>"foo_value"))
-      assert logger.infos[1].include?(%("bar"=>"bar_value"))
+      assert_include logger.infos[1], 'Parameters: {', %("foo"=>"foo_value"), %("bar"=>"bar_value")
     end
   end
 
@@ -147,9 +154,7 @@ class ParamsFormattableTest < ActionController::TestCase
       logs = logger.infos.map { |log| remove_color_seq(log) }
       assert_equal '  Parameters: ', logs[1]
       hash = hash_from_logs(logs, 2, 8)
-      assert_equal hash['foo'], 'foo_value'
-      assert_equal hash['bar']['prop'], 'prop_value'
-      assert_equal hash['bar']['attr'], 'attr_value'
+      assert_hash hash
     end
   end
   # rubocop:enable Metrics/LineLength
