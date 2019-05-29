@@ -5,12 +5,14 @@ require 'awesome_print'
 require 'flog/payload_value_shuntable'
 
 module Flog
+  # Overrides `inspect` method for formatting itself
   module ParamsInspectOverridable
     def inspect
       "\n#{ai(plain: !ActionController::LogSubscriber.colorize_logging)}"
     end
   end
 
+  # Overrides `except` method for formatting ecepted params.
   module ParamsExceptOverridable
     def except(*keys)
       excepted = super(*keys)
@@ -19,6 +21,7 @@ module Flog
     end
   end
 
+  # ParamsFormattable enables to format request parameters in log.
   module ParamsFormattable
     include Flog::PayloadValueShuntable
     def start_processing(event)
@@ -63,8 +66,4 @@ module Flog
   end
 end
 
-module ActionController
-  class LogSubscriber
-    prepend Flog::ParamsFormattable
-  end
-end
+ActionController::LogSubscriber.prepend(Flog::ParamsFormattable)

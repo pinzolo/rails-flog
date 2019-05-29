@@ -3,6 +3,7 @@
 require 'rails'
 
 module Flog
+  # Status returns checke result of switch files
   class Status
     SWITCH_FILE_NAME = 'no-flog.txt'
     SQL_SWITCH_FILE_NAME = 'no-flog-sql.txt'

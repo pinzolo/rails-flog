@@ -2,9 +2,12 @@
 
 require 'anbt-sql-formatter/rule'
 
+# Flog is root module of this gem
 module Flog
   ONELINE_IN_VALUES_NUM = ::AnbtSql::Rule::ONELINE_IN_VALUES_NUM
 
+  # Configuration of this gem.
+  # Call `configure` to setup.
   class Configuration
     attr_writer :ignore_cached_query, :force_on_nested_params
     attr_accessor :query_duration_threshold, :params_key_count_threshold, :sql_indent, :sql_in_values_num

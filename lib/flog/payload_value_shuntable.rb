@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Flog
+  # PayloadValueShuntable enables to shunt value in payload
   module PayloadValueShuntable
     def shunt_payload_value(payload, key, temp_value, &block)
       return unless block

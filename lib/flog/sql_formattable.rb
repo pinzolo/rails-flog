@@ -4,6 +4,7 @@ require 'active_record/log_subscriber'
 require 'flog/payload_value_shuntable'
 
 module Flog
+  # SqlFormattable enables to format SQL log
   module SqlFormattable
     include Flog::PayloadValueShuntable
 
@@ -51,8 +52,4 @@ module Flog
   end
 end
 
-module ActiveRecord
-  class LogSubscriber
-    prepend Flog::SqlFormattable
-  end
-end
+ActiveRecord::LogSubscriber.prepend(Flog::SqlFormattable)

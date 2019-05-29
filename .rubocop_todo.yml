@@ -22,12 +22,12 @@ Metrics/AbcSize:
 #   Max: 15
 
 # Offense count: 8
-Style/Documentation:
-  Exclude:
-    - 'spec/**/*'
-    - 'test/**/*'
-    - 'lib/flog/configuration.rb'
-    - 'lib/flog/params_formattable.rb'
-    - 'lib/flog/payload_value_shuntable.rb'
-    - 'lib/flog/sql_formattable.rb'
-    - 'lib/flog/status.rb'
+# Style/Documentation:
+#   Exclude:
+#     - 'spec/**/*'
+#     - 'test/**/*'
+#     - 'lib/flog/configuration.rb'
+#     - 'lib/flog/params_formattable.rb'
+#     - 'lib/flog/payload_value_shuntable.rb'
+#     - 'lib/flog/sql_formattable.rb'
+#     - 'lib/flog/status.rb'
