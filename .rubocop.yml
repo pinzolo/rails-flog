@@ -3,14 +3,9 @@ Layout/SpaceBeforeComma:
   Exclude:
     - 'test/unit/sql_formattable_test.rb'
 
-# This is test code not production.
-Security/Eval:
+Metrics/AbcSize:
   Exclude:
-    - 'test/unit/params_formattable_test.rb'
-
-# method having '?' suffix should return boolean, double negation is very useful.
-Style/DoubleNegation:
-  Enabled: false
+    - 'test/**/*'
 
 # 80 is too restrict.
 Metrics/LineLength:
@@ -20,6 +15,11 @@ Metrics/MethodLength:
   Exclude:
     - 'test/**/*'
 
-Metrics/AbcSize:
+# This is test code not production.
+Security/Eval:
   Exclude:
-    - 'test/**/*'
+    - 'test/unit/params_formattable_test.rb'
+
+# method having '?' suffix should return boolean, double negation is very useful.
+Style/DoubleNegation:
+  Enabled: false
