@@ -101,6 +101,8 @@ Flog.configure do |config|
   config.params_key_count_threshold = 2
   # If this value is true, nested Hash parameter is formatted coercively in any situation
   config.force_on_nested_params = false
+  # If this value is true, not format query
+  config.ignore_query = true
 end
 ```
 
@@ -112,6 +114,7 @@ end
 |query_duration_threshold   |float     |0.0           |
 |params_key_count_threshold |integer   |1             |
 |force_on_nested_params     |boolean   |true          |
+|ignore_query               |boolean   |false         |
 
 ## Disable temporary
 

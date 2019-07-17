@@ -9,7 +9,7 @@ module Flog
   # Configuration of this gem.
   # Call `configure` to setup.
   class Configuration
-    attr_writer :ignore_cached_query, :force_on_nested_params
+    attr_writer :ignore_cached_query, :force_on_nested_params, :ignore_query
     attr_accessor :query_duration_threshold, :params_key_count_threshold, :sql_indent, :sql_in_values_num
 
     def initialize
@@ -19,14 +19,19 @@ module Flog
       @force_on_nested_params = true
       @sql_indent = "\t"
       @sql_in_values_num = 1
+      @ignore_query = false
     end
 
     def ignore_cached_query?
-      !!@ignore_cached_query
+      !!@ignore_cached_query || @ignore_query
     end
 
     def force_on_nested_params?
       !!@force_on_nested_params
+    end
+
+    def ignore_query?
+      @ignore_query
     end
   end
 
