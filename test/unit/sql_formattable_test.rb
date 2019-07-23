@@ -127,6 +127,24 @@ class SqlFormattableTest < ActiveSupport::TestCase
     end
   end
 
+  def test_sql_is_not_formatted_on_cached_query_when_ignore_query_configuration_is_true
+    configure(ignore_cached_query: false, ignore_query: true)
+    prepare_for_query_cache
+    assert_logger do |logger|
+      logger.debugs.each do |log|
+        assert_one_line_sql log if log.include?('CACHE')
+      end
+    end
+  end
+
+  def test_sql_is_not_formatted_when_ignore_query_configuration_is_true
+    configure(ignore_query: true)
+    Book.where(category: 'comics').to_a
+    assert_logger do |logger|
+      assert_one_line_sql logger.debugs.first
+    end
+  end
+
   def test_sql_is_not_formatted_when_duration_is_under_threshold
     configure(query_duration_threshold: 100.0)
     Book.where(category: 'comics').to_a
