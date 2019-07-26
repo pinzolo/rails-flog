@@ -158,4 +158,14 @@ class ParamsFormattableTest < ActionController::TestCase
     end
   end
   # rubocop:enable Metrics/LineLength
+
+  def test_parameters_log_is_not_formatted_when_ignore_params_configuration_is_true
+    Flog.configure do |config|
+      config.ignore_params = true
+    end
+    get_show foo: 'foo_value', bar: 'bar_value'
+    assert_logger do |logger|
+      assert_include logger.infos[1], 'Parameters: {', %("foo"=>"foo_value"), %("bar"=>"bar_value")
+    end
+  end
 end

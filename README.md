@@ -103,6 +103,8 @@ Flog.configure do |config|
   config.force_on_nested_params = false
   # If this value is true, not format query
   config.ignore_query = true
+  # If this value is true, not format parameters
+  config.ignore_params = true
 end
 ```
 
@@ -115,6 +117,7 @@ end
 |params_key_count_threshold |integer   |1             |
 |force_on_nested_params     |boolean   |true          |
 |ignore_query               |boolean   |false         |
+|ignore_params              |boolean   |false         |
 
 ## Disable temporary
 
