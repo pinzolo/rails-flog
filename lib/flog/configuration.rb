@@ -32,7 +32,7 @@ module Flog
     end
 
     def ignore_query?
-      @ignore_query
+      !!@ignore_query
     end
 
     def ignore_params?
