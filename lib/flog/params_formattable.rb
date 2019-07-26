@@ -45,6 +45,7 @@ module Flog
     end
 
     def formattable?(event)
+      return false if Flog.config.ignore_params?
       return false unless Flog::Status.params_formattable?
 
       return true if force_format_by_nested_params?(event)
