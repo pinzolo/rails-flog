@@ -35,8 +35,8 @@ module Flog
     end
 
     def formattable?(event)
-      return false unless Flog::Status.sql_formattable?
       return false if Flog.config.ignore_query?
+      return false unless Flog::Status.sql_formattable?
 
       return false if ignore_by_cached_query?(event)
 
