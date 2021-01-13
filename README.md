@@ -156,3 +156,4 @@ Priority of this feature is higher than configurations.
 - v1.4.0  (2017-10-01 JST):  Compatible for Rails 5.0 and Rails 5.1, and dropped Ruby 1.9.3 support
 - v1.5.0  (2018-12-19 JST):  Add `sql_indent` and `sql_in_values_num` options, and dropped eol rails versions.
 - v1.6.0  (2019-07-26 JST):  Add `ignore_query` and `ignore_params` options (Thanks @mothule)
+- v1.6.1  (2021-01-13 JST):  Use amazing_print instead of awesome_print
