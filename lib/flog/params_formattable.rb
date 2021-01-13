@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'action_controller/log_subscriber'
-require 'awesome_print'
+require 'amazing_print'
 require 'flog/payload_value_shuntable'
 
 module Flog
