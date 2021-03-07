@@ -8,20 +8,20 @@ rvm:
   - 2.4
   - 2.5
   - 2.6
+  - 2.7
 gemfile:
-  - gemfiles/rails_4_2_x.gemfile
-  - gemfiles/rails_5_0_x.gemfile
-  - gemfiles/rails_5_1_x.gemfile
   - gemfiles/rails_5_2_x.gemfile
   - gemfiles/rails_6_0_x.gemfile
+  - gemfiles/rails_6_1_x.gemfile
 matrix:
   exclude:
-    # FIXME: will remove on dropping Rails 4.2 support
-    - gemfile: gemfiles/rails_4_2_x.gemfile
-      rvm: 2.6
     - gemfile: gemfiles/rails_6_0_x.gemfile
       rvm: 2.3
     - gemfile: gemfiles/rails_6_0_x.gemfile
+      rvm: 2.4
+    - gemfile: gemfiles/rails_6_1_x.gemfile
+      rvm: 2.3
+    - gemfile: gemfiles/rails_6_1_x.gemfile
       rvm: 2.4
 before_install:
   - gem uninstall -v '>= 2' -i $(rvm gemdir)@global -ax bundler || true
