@@ -19,6 +19,10 @@ matrix:
       rvm: 2.3
     - gemfile: gemfiles/rails_6_0_x.gemfile
       rvm: 2.4
+    - gemfile: gemfiles/rails_6_1_x.gemfile
+      rvm: 2.3
+    - gemfile: gemfiles/rails_6_1_x.gemfile
+      rvm: 2.4
 before_install:
   - gem uninstall -v '>= 2' -i $(rvm gemdir)@global -ax bundler || true
   - gem install bundler -v '< 2'
