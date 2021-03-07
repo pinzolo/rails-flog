@@ -14,6 +14,7 @@ gemfile:
   - gemfiles/rails_5_1_x.gemfile
   - gemfiles/rails_5_2_x.gemfile
   - gemfiles/rails_6_0_x.gemfile
+  - gemfiles/rails_6_1_x.gemfile
 matrix:
   exclude:
     # FIXME: will remove on dropping Rails 4.2 support
