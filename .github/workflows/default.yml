@@ -7,7 +7,7 @@ on:
       - README.md
       - Dockerfile
       - docker-compose.yml
-  pull_requests:
+  pull_request:
     branches: [ $default-branch ]
 
 jobs:
@@ -39,4 +39,3 @@ jobs:
         run: |
           gem install rubocop
           rubocop
-
