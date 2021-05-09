@@ -5,7 +5,7 @@ require 'test_helper'
 
 class TestController < ActionController::Base
   def initialize(routes)
-    super
+    super()
     @routes = routes
   end
 
