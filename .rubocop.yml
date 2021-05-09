@@ -1,3 +1,6 @@
+AllCops:
+  NewCops: enable
+
 # Current style is easy to confirm SQL.
 Layout/SpaceBeforeComma:
   Exclude:
@@ -22,4 +25,7 @@ Security/Eval:
 
 # method having '?' suffix should return boolean, double negation is very useful.
 Style/DoubleNegation:
+  Enabled: false
+
+Gemspec/RequiredRubyVersion:
   Enabled: false

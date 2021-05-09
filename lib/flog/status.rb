@@ -31,7 +31,7 @@ module Flog
         if Rails.root&.exist?
           Rails.root
         else
-          Pathname.new(File.expand_path(File.dirname(__FILE__) + '../../'))
+          Pathname.new(File.expand_path("#{File.dirname(__FILE__)}../../"))
         end
       end
 

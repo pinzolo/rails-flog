@@ -41,7 +41,7 @@ class StatusTest < ActiveSupport::TestCase
   include StatusTestHelper
 
   def setup
-    @test_root = Pathname.new(File.expand_path(File.dirname(__FILE__) + '../../'))
+    @test_root = Pathname.new(File.expand_path("#{File.dirname(__FILE__)}../../"))
   end
 
   def teardown
