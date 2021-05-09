@@ -30,7 +30,6 @@ Gem::Specification.new do |spec|
   spec.metadata['changelog_uri'] = 'https://github.com/pinzolo/rails-flog/blob/master/CHANGELOG.md'
 
   spec.add_development_dependency 'bundler'
-  spec.add_development_dependency 'coveralls_reborn'
   spec.add_development_dependency 'minitest'
   spec.add_development_dependency 'rake'
   spec.add_development_dependency 'rubocop'
