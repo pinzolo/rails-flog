@@ -24,6 +24,8 @@ jobs:
           bundle install --jobs 4 --retry 3 --path vendor/bundle
       - name: run tests
         run: bundle exec rake
+      - name: Coveralls GitHub Action
+        uses: coverallsapp/github-action@v1.1.2
   rubocop:
     runs-on: ubuntu-latest
     steps:
