@@ -1,6 +1,11 @@
-name: Manual Trigger
+name: Ruby
 
-on: [workflow_dispatch]
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
 
 jobs:
   test:
