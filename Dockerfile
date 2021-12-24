@@ -6,4 +6,3 @@ WORKDIR /rails-flog
 COPY . /rails-flog
 RUN bundle install
 CMD ["bundle", "exec", "rake"]
-
