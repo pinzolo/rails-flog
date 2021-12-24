@@ -28,6 +28,7 @@ Gem::Specification.new do |spec|
   spec.metadata['homepage_uri'] = spec.homepage
   spec.metadata['source_code_uri'] = spec.homepage
   spec.metadata['changelog_uri'] = 'https://github.com/pinzolo/rails-flog/blob/master/CHANGELOG.md'
+  spec.metadata['rubygems_mfa_required'] = true
 
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'minitest'
